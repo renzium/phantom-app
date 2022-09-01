@@ -37,14 +37,25 @@ import MDButton from "components/MDButton";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
+import ClipLoader from "react-spinners/ClipLoader";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase";
+import { useNavigate } from "react-router-dom";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  let history = useNavigate();
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
 
   return (
     <BasicLayout image={bgImage}>
@@ -63,31 +74,34 @@ function Basic() {
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput
+                onChange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
+                type="email"
+                label="Email"
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <MDInput
+                onChange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }));
+                }}
+                type="password"
+                label="Password"
+                fullWidth
+              />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -102,8 +116,25 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+              <MDButton
+                onClick={() => {
+                  setLoading(true);
+                  signInWithEmailAndPassword(auth, user.email, user.password)
+                    .then((res) => {
+                      setLoading(false);
+                      alert("Login Successfully");
+                      history("/dashboard");
+                    })
+                    .catch((err) => {
+                      setLoading(false);
+                      alert("Invalid Credentials");
+                    });
+                }}
+                variant="gradient"
+                color="info"
+                fullWidth
+              >
+                sign in <ClipLoader loading={loading} size={25} />
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
