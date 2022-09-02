@@ -103,47 +103,66 @@ function Dashboard() {
             </MDBox>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
+        <Grid container>
+          <Grid item xs={3}>
+            <MDBox mb={3}>
+              <img
+                style={{
+                  width: "250px",
+                  padding: "1em",
+                  background: "white",
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 10px #ccc",
+                }}
+                src={require("../../assets/nft.jpeg")}
+                alt=""
+              />
+            </MDBox>
           </Grid>
-        </MDBox>
+          <Grid item xs={9}>
+            <MDBox mt={4.5}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6} lg={4}>
+                  <MDBox mb={3}>
+                    <ReportsBarChart
+                      color="info"
+                      title="website views"
+                      description="Last Campaign Performance"
+                      date="campaign sent 2 days ago"
+                      chart={reportsBarChartData}
+                    />
+                  </MDBox>
+                </Grid>
+                <Grid item xs={12} md={6} lg={4}>
+                  <MDBox mb={3}>
+                    <ReportsLineChart
+                      color="success"
+                      title="daily sales"
+                      description={
+                        <>
+                          (<strong>+15%</strong>) increase in today sales.
+                        </>
+                      }
+                      date="updated 4 min ago"
+                      chart={sales}
+                    />
+                  </MDBox>
+                </Grid>
+                <Grid item xs={12} md={6} lg={4}>
+                  <MDBox mb={3}>
+                    <ReportsLineChart
+                      color="dark"
+                      title="completed tasks"
+                      description="Last Campaign Performance"
+                      date="just updated"
+                      chart={tasks}
+                    />
+                  </MDBox>
+                </Grid>
+              </Grid>
+            </MDBox>
+          </Grid>
+        </Grid>
       </MDBox>
     </DashboardLayout>
   );

@@ -1,8 +1,10 @@
 {
   "files": {
-    "main.js": "/static/js/main.39a90088.js",
+    "main.js": "/static/js/main.6aec300a.js",
     "static/media/bg-sign-in-basic.jpeg": "/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg",
     "static/media/bg-sign-up-cover.jpeg": "/static/media/bg-sign-up-cover.30c5950b22e74f0d82ba.jpeg",
+    "static/media/nft.jpeg": "/static/media/nft.5504e93a2eea5d36fbca.jpeg",
+    "static/media/logo.png": "/static/media/logo.b414bda2429e93f3bc1e.png",
     "static/media/team-1.jpg": "/static/media/team-1.0fd36e0ee93dcfacdef8.jpg",
     "static/media/team-2.jpg": "/static/media/team-2.13ae2ce3e12f4cfed420.jpg",
     "static/media/team-3.jpg": "/static/media/team-3.0ef0be95e6850814c79e.jpg",
@@ -14,9 +16,9 @@
     "static/media/logo-jira.svg": "/static/media/logo-jira.f9c1ddbe3e751a29bd16580977ade064.svg",
     "static/media/logo-atlassian.svg": "/static/media/logo-atlassian.d92c4f81bb3efbf288b3ef71ce2fbfb0.svg",
     "index.html": "/index.html",
-    "main.39a90088.js.map": "/static/js/main.39a90088.js.map"
+    "main.6aec300a.js.map": "/static/js/main.6aec300a.js.map"
   },
   "entrypoints": [
-    "static/js/main.39a90088.js"
+    "static/js/main.6aec300a.js"
   ]
 }

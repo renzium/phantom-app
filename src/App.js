@@ -178,7 +178,7 @@ export default function App() {
         <>
           <Sidenav
             color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+            brand={require("./assets/logo.png")}
             brandName="3D Root Lab"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
