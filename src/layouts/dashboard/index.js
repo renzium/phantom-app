@@ -26,6 +26,9 @@ import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import { Line } from "react-chartjs-2";
+import Axios from "axios/Axios";
+import { useState, useEffect } from "react";
 
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
@@ -37,6 +40,85 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+
+  const [humidityData, setHumidityData] = useState([]);
+  const [tempData, setTempData] = useState([]);
+  const [phData, setPhData] = useState([]);
+
+  const humidity_data = {
+    labels: humidityData && humidityData.map(humidity => humidity._id),
+    datasets: [
+      {
+        label: "Humidity",
+        data: humidityData && humidityData.map(humidity => humidity.changeAmount),
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)"
+      }
+    ]
+  };
+
+  const temp_data = {
+    labels: tempData && tempData.map(humidity => humidity._id),
+    datasets: [
+      {
+        label: "Temperature (Celcius)",
+        data: tempData && tempData.map(humidity => humidity.changeAmount),
+        fill: true,
+        backgroundColor: "rgba(255,0,0,0.2)",
+        borderColor: "rgba(255,0,0,1)"
+      }
+    ]
+  };
+
+  const ph_data = {
+    labels: phData && phData.map(humidity => humidity._id),
+    datasets: [
+      {
+        label: "pH",
+        data: phData && phData.map(humidity => humidity.changeAmount),
+        fill: true,
+        backgroundColor: "rgba(128,0,0,0.2)",
+        borderColor: "rgba(128,0,0,1)"
+      }
+    ]
+  };
+
+  const humidityHandler = () => {
+    Axios.get(`splTransfers?account=9iYqFPocWJhALeJ1bKPrF7k8La1UtV88XvP8aZTSho7y`)
+      .then(response => {
+        setHumidityData(response.data.data);
+      })
+      .catch(error => {
+        console.log({ error });
+      });
+  };
+
+  const tempHandler = () => {
+    Axios.get(`splTransfers?account=FCgYUwNW3Dts3dteLQjQWwz5E6gytJgLDVcCqYXB7u4k`)
+      .then(response => {
+        setTempData(response.data.data);
+      })
+      .catch(error => {
+        console.log({ error });
+      });
+  }
+
+  const phHandler = () => {
+    Axios.get(`splTransfers?account=FmA4MZVTtY8nKqUZY3voVc6yK6n6R3hh4dH9AxfmWJRb`)
+      .then(response => {
+        setPhData(response.data.data);
+      })
+      .catch(error => {
+        console.log({ error });
+      });
+  }
+
+  useEffect(() => {
+    humidityHandler();
+    tempHandler();
+    phHandler();
+  }, []);
 
   return (
     <DashboardLayout>
@@ -104,59 +186,34 @@ function Dashboard() {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={3}>
-            <MDBox mb={3}>
-              <img
-                style={{
-                  width: "250px",
-                  padding: "1em",
-                  background: "white",
-                  borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #ccc",
-                }}
-                src={require("../../assets/nft.jpeg")}
-                alt=""
-              />
+          <Grid item xs={9}>
+            <MDBox mt={4.5}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={12} lg={12}>
+                  <MDBox mb={3}>
+                    <Line data={humidity_data} />
+                  </MDBox>
+                </Grid>
+              </Grid>
             </MDBox>
           </Grid>
           <Grid item xs={9}>
             <MDBox mt={4.5}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={12} lg={12}>
                   <MDBox mb={3}>
-                    <ReportsBarChart
-                      color="info"
-                      title="website views"
-                      description="Last Campaign Performance"
-                      date="campaign sent 2 days ago"
-                      chart={reportsBarChartData}
-                    />
+                    <Line data={temp_data} />
                   </MDBox>
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+              </Grid>
+            </MDBox>
+          </Grid>
+          <Grid item xs={9}>
+            <MDBox mt={4.5}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={12} lg={12}>
                   <MDBox mb={3}>
-                    <ReportsLineChart
-                      color="success"
-                      title="daily sales"
-                      description={
-                        <>
-                          (<strong>+15%</strong>) increase in today sales.
-                        </>
-                      }
-                      date="updated 4 min ago"
-                      chart={sales}
-                    />
-                  </MDBox>
-                </Grid>
-                <Grid item xs={12} md={6} lg={4}>
-                  <MDBox mb={3}>
-                    <ReportsLineChart
-                      color="dark"
-                      title="completed tasks"
-                      description="Last Campaign Performance"
-                      date="just updated"
-                      chart={tasks}
-                    />
+                    <Line data={ph_data} />
                   </MDBox>
                 </Grid>
               </Grid>
