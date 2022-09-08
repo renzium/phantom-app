@@ -29,6 +29,7 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 import { Line } from "react-chartjs-2";
 import Axios from "axios/Axios";
 import { useState, useEffect } from "react";
+import moment from 'moment';
 
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
@@ -46,7 +47,7 @@ function Dashboard() {
   const [phData, setPhData] = useState([]);
 
   const humidity_data = {
-    labels: humidityData && humidityData.map(humidity => humidity._id),
+    labels: humidityData && humidityData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
     datasets: [
       {
         label: "Humidity",
@@ -59,7 +60,7 @@ function Dashboard() {
   };
 
   const temp_data = {
-    labels: tempData && tempData.map(humidity => humidity._id),
+    labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
     datasets: [
       {
         label: "Temperature (Celcius)",
@@ -72,7 +73,7 @@ function Dashboard() {
   };
 
   const ph_data = {
-    labels: phData && phData.map(humidity => humidity._id),
+    labels: phData && phData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
     datasets: [
       {
         label: "pH",
