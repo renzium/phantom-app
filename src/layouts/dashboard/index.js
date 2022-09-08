@@ -47,7 +47,7 @@ function Dashboard() {
   const [phData, setPhData] = useState([]);
 
   const humidity_data = {
-    labels: humidityData && humidityData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
+    labels: humidityData && humidityData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
     datasets: [
       {
         label: "Humidity",
@@ -60,7 +60,7 @@ function Dashboard() {
   };
 
   const temp_data = {
-    labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
+    labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
     datasets: [
       {
         label: "Temperature (Celcius)",
@@ -73,7 +73,7 @@ function Dashboard() {
   };
 
   const ph_data = {
-    labels: phData && phData.map(humidity => moment(humidity.blockTime * 1000).format('Do MMMM YYYY')),
+    labels: phData && phData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
     datasets: [
       {
         label: "pH",
