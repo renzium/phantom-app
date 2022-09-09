@@ -38,6 +38,7 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import '../../assets/css/style.css';
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
@@ -47,11 +48,11 @@ function Dashboard() {
   const [phData, setPhData] = useState([]);
 
   const humidity_data = {
-    labels: humidityData && humidityData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
+    labels: humidityData && humidityData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')).reverse(),
     datasets: [
       {
         label: "Humidity",
-        data: humidityData && humidityData.map(humidity => humidity.changeAmount),
+        data: humidityData && humidityData.map(humidity => humidity.changeAmount / 1000000000).reverse(),
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)"
@@ -60,11 +61,11 @@ function Dashboard() {
   };
 
   const temp_data = {
-    labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
+    labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')).reverse(),
     datasets: [
       {
         label: "Temperature (Celcius)",
-        data: tempData && tempData.map(humidity => humidity.changeAmount),
+        data: tempData && tempData.map(humidity => humidity.changeAmount / 1000000000).reverse(),
         fill: true,
         backgroundColor: "rgba(255,0,0,0.2)",
         borderColor: "rgba(255,0,0,1)"
@@ -73,11 +74,11 @@ function Dashboard() {
   };
 
   const ph_data = {
-    labels: phData && phData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')),
+    labels: phData && phData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')).reverse(),
     datasets: [
       {
         label: "pH",
-        data: phData && phData.map(humidity => humidity.changeAmount),
+        data: phData && phData.map(humidity => humidity.changeAmount / 1000000000).reverse(),
         fill: true,
         backgroundColor: "rgba(128,0,0,0.2)",
         borderColor: "rgba(128,0,0,1)"
@@ -131,8 +132,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
+                title="Last Humidity"
+                count={humidityData.length && humidityData[0].changeAmount / 1000000000 + '%'}
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -145,8 +146,8 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Last Temperature"
+                count={tempData.length && tempData[0].changeAmount / 1000000000 + ' Celcius'}
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -160,8 +161,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
-                count="34k"
+                title="Last pH"
+                count={phData.length && (phData[0].changeAmount / 1000000000).toFixed(2)}
                 percentage={{
                   color: "success",
                   amount: "+1%",
@@ -175,8 +176,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
-                count="+91"
+                title="Last KHLR"
+                count="33.33 KHLR"
                 percentage={{
                   color: "success",
                   amount: "",
@@ -192,7 +193,10 @@ function Dashboard() {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={12} lg={12}>
                   <MDBox mb={3}>
-                    <Line data={humidity_data} />
+                    <div className="humidity-tooltip">
+                      <Line data={humidity_data} />
+                      <span class="humidity-tooltiptext">{`https://public-api.solscan.io/account/splTransfers?account=9iYqFPocWJhALeJ1bKPrF7k8La1UtV88XvP8aZTSho7y`}</span>
+                    </div>
                   </MDBox>
                 </Grid>
               </Grid>
@@ -203,7 +207,10 @@ function Dashboard() {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={12} lg={12}>
                   <MDBox mb={3}>
-                    <Line data={temp_data} />
+                    <div className="temp-tooltip">
+                      <Line data={temp_data} />
+                      <span class="temp-tooltiptext">{`https://public-api.solscan.io/account/splTransfers?account=9iYqFPocWJhALeJ1bKPrF7k8La1UtV88XvP8aZTSho7y`}</span>
+                    </div>
                   </MDBox>
                 </Grid>
               </Grid>
@@ -214,7 +221,10 @@ function Dashboard() {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={12} lg={12}>
                   <MDBox mb={3}>
-                    <Line data={ph_data} />
+                    <div className="tooltip">
+                      <Line data={ph_data} />
+                      <span class="tooltiptext">{`https://public-api.solscan.io/account/splTransfers?account=FmA4MZVTtY8nKqUZY3voVc6yK6n6R3hh4dH9AxfmWJRb`}</span>
+                    </div>
                   </MDBox>
                 </Grid>
               </Grid>
