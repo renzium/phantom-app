@@ -122,6 +122,18 @@ function Dashboard() {
     phHandler();
   }, []);
 
+  useEffect(() => {
+    const myInterval = setInterval(function () {
+      humidityHandler();
+      tempHandler();
+      phHandler();
+    }, 60000);
+
+    return () => {
+      clearInterval(myInterval);
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -131,7 +143,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
-                icon="weekend"
+                icon="ac_unit"
                 title="Last Humidity"
                 count={humidityData.length && humidityData[0].changeAmount / 1000000000 + '%'}
                 percentage={{
@@ -145,7 +157,7 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
+                icon="device_thermostat"
                 title="Last Temperature"
                 count={tempData.length && tempData[0].changeAmount / 1000000000 + ' Celcius'}
                 percentage={{
@@ -160,7 +172,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
-                icon="store"
+                icon="auto_graph"
                 title="Last pH"
                 count={phData.length && (phData[0].changeAmount / 1000000000).toFixed(2)}
                 percentage={{
@@ -175,7 +187,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
-                icon="person_add"
+                icon="adjust"
                 title="Last KHLR"
                 count="33.33 KHLR"
                 percentage={{
