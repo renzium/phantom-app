@@ -1,17 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -64,7 +50,7 @@ function Dashboard() {
     labels: tempData && tempData.map(humidity => moment(humidity.blockTime * 1000).format('hh:mm:ss')).reverse(),
     datasets: [
       {
-        label: "Temperature (Celcius)",
+        label: "Temperature (Celsius)",
         data: tempData && tempData.map(humidity => humidity.changeAmount / 1000000000).reverse(),
         fill: true,
         backgroundColor: "rgba(255,0,0,0.2)",
@@ -159,7 +145,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="device_thermostat"
                 title="Last Temperature"
-                count={tempData.length && tempData[0].changeAmount / 1000000000 + ' Celcius'}
+                count={tempData.length && tempData[0].changeAmount / 1000000000 + ' Celsius'}
                 percentage={{
                   color: "success",
                   amount: "+3%",
