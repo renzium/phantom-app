@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.3c5d68bc.css",
-    "main.js": "/static/js/main.71daab1c.js",
+    "main.js": "/static/js/main.11bef3d0.js",
     "static/media/bg-sign-in-basic.jpeg": "/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg",
     "static/media/bg-sign-up-cover.jpeg": "/static/media/bg-sign-up-cover.30c5950b22e74f0d82ba.jpeg",
     "static/media/logo.png": "/static/media/logo.b414bda2429e93f3bc1e.png",
@@ -17,10 +17,10 @@
     "static/media/logo-atlassian.svg": "/static/media/logo-atlassian.f2b0e8570a4b4ce768854ff3dad1a6e1.svg",
     "index.html": "/index.html",
     "main.3c5d68bc.css.map": "/static/css/main.3c5d68bc.css.map",
-    "main.71daab1c.js.map": "/static/js/main.71daab1c.js.map"
+    "main.11bef3d0.js.map": "/static/js/main.11bef3d0.js.map"
   },
   "entrypoints": [
     "static/css/main.3c5d68bc.css",
-    "static/js/main.71daab1c.js"
+    "static/js/main.11bef3d0.js"
   ]
 }
