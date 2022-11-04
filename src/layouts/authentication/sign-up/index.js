@@ -152,7 +152,11 @@ function SignIn() {
                      password: user.password,
                    })
                    .then((res) => {
+                     setLoading(false);
+                     console.log(res);
                      localStorage.setItem("phantom_user", JSON.stringify(res.data));
+                      alert("Register Successfully");
+                      history.push("/dashboard");
                    })
                    .catch((err) => {
                      alert(err);
