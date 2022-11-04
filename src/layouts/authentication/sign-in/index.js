@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import axios from "axios";
 // react-router-dom components
 import { Link, useHistory } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function SignIn() {
       image={bgSignIn}
     >
       <VuiBox component="form" role="form">
-        <VuiBox mb={2}>
+        <VuiBox mb={ 2 }>
           <div
             style={{
               display: "flex",
@@ -99,16 +99,20 @@ function SignIn() {
           <VuiButton
             onClick={() => {
               setLoading(true);
-              signInWithEmailAndPassword(auth, user.email, user.password)
-                .then((res) => {
-                  setLoading(false);
-                  alert("Login Successfully");
-                  history.push("/dashboard");
-                })
-                .catch((err) => {
-                  setLoading(false);
-                  alert("Invalid Credentials");
-                });
+              // signInWithEmailAndPassword(auth, user.email, user.password)
+        axios
+          .post("https://phantom-app.herokuapp.com/api/users/login",{email:user.email, password:user.password})
+          .then((res) => {
+            setLoading(false);
+            console.log(res)
+            localStorage.setItem("phantom_user",JSON.stringify(res.data))
+            alert("Login Successfully");
+            history.push("/dashboard");
+          })
+          .catch((err) => {
+            setLoading(false);
+            alert("Invalid Credentials");
+          });
             }}
             color="info"
             fullWidth

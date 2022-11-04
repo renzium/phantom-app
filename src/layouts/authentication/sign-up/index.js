@@ -36,6 +36,7 @@ import { ref, set } from "firebase/database";
 import { TextField } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "firebase";
+import axios from "axios";
 
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
@@ -144,14 +145,19 @@ function SignIn() {
             <VuiButton
               onClick={() => {
                 setLoading(true);
-                createUserWithEmailAndPassword(auth, user.email, user.password)
-                  .then((res) => {
-                    writeUserData(res.user.uid, user.name, user.email, user.password);
-                  })
-                  .catch((err) => {
-                    alert(err);
-                    setLoading(false);
-                  });
+                 axios
+                   .post("https://phantom-app.herokuapp.com/api/users", {
+                     name:user.name,
+                     email: user.email,
+                     password: user.password,
+                   })
+                   .then((res) => {
+                     localStorage.setItem("phantom_user", JSON.stringify(res.data));
+                   })
+                   .catch((err) => {
+                     alert(err);
+                     setLoading(false);
+                   });
               }}
               color="info"
               fullWidth
