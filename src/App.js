@@ -29,12 +29,75 @@ import { setMiniSidenav, setOpenConfigurator, useVisionUIController } from "cont
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "firebase";
 
+
+
+
+import { PublicKey, Transaction } from "@solana/web3.js";
+import { display, height } from "@mui/system";
+
+
+
 export default function App() {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  let history = useHistory();
+
+  const [provider, setProvider] = useState();
+  const [walletKey, setWalletKey] = useState();
+  
+
+const getProvider = () => {
+  if ("solana" in window) {
+    // @ts-ignore
+    const provider = window.solana ;
+    if (provider.isPhantom) return provider ;
+  }
+};
+
+
+  useEffect(() => {
+    const provider = getProvider();
+
+    if (provider) setProvider(provider);
+    else setProvider(undefined);
+  }, []);
+
+
+  
+
+  const connectWallet = async () => {
+   console.log("Clicked")
+   // @ts-ignore
+   const { solana } = window;
+
+   if (solana) {
+     try {
+       const response = await solana.connect();
+       console.log("wallet account ", response.publicKey.toString());
+       setWalletKey(response.publicKey.toString());
+     } catch (err) {
+       // { code: 4001, message: 'User rejected the request.' }
+     }
+   }
+ };
+  
+
+
+    const disconnectWallet = async () => {
+    // @ts-ignore
+    const { solana } = window;
+
+    if (walletKey && solana) {
+      await solana.disconnect();
+      setWalletKey(undefined);
+    }
+  };
+
+
+
 
   // Cache for the rtl
   useMemo(() => {
@@ -75,9 +138,9 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
-      // if (route.collapse) {
-      //   return getRoutes(route.collapse);
-      // }
+      if (route.collapse) {
+        return getRoutes(route.collapse);
+      }
 
       if (route.route) {
         return <Route exact path={route.route} component={route.component} key={route.key} />;
@@ -85,8 +148,6 @@ export default function App() {
 
       return null;
     });
-
-  let history = useHistory();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -101,6 +162,56 @@ export default function App() {
       <CssBaseline />
       {layout === "dashboard" && (
         <>
+          {/* <div style={ {
+            zIndex: "1000",
+            background: "white",
+            position: "fixed",
+            width: "100%",
+            display: "none",
+            alignContent: "center",
+            height: "8rem",
+            left: "8rem"
+          }}>
+            {provider && !walletKey && (
+              <button
+                style={{
+                  fontSize: "16px",
+                  padding: "15px",
+                  fontWeight: "bold",
+                  borderRadius: "5px",
+                }}
+                onClick={connectWallet}
+              >
+                Connect to Phantom Wallet
+              </button>
+            )}
+
+            {provider && walletKey && (
+              <div>
+                <p>Connected account {walletKey}</p>
+
+                <button
+                  style={{
+                    fontSize: "16px",
+                    padding: "15px",
+                    fontWeight: "bold",
+                    borderRadius: "5px",
+                    margin: "15px auto",
+                  }}
+                  onClick={disconnectWallet}
+                >
+                  Disconnect
+                </button>
+              </div>
+            )}
+
+            {!provider && (
+              <p>
+                No provider found. Install{" "}
+                <a href="https://phantom.app/">Phantom Browser extension</a>
+              </p>
+            )}
+          </div> */}
           <Sidenav
             color={sidenavColor}
             brand=""

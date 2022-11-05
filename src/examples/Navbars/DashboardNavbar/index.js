@@ -19,7 +19,7 @@
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useHistory } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -62,6 +62,7 @@ import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import { auth } from "firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import Phantom from "phantom";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -69,6 +70,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+  let history = useHistory();
 
   useEffect(() => {
     // Setting the navbar type
@@ -148,11 +150,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+          Dashboard
+          {/* <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} /> */}
         </VuiBox>
+      
+        <Phantom/>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <VuiBox pr={1}>
+            {/* <VuiBox pr={1}>
               <VuiInput
                 placeholder="Type here..."
                 icon={{ component: "search", direction: "left" }}
@@ -166,29 +171,30 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   backgroundColor: "info.main !important",
                 })}
               />
-            </VuiBox>
+            </VuiBox> */}
             <VuiBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in">
-                <IconButton sx={navbarIconButton} size="small">
-                  <Icon
+              <IconButton sx={navbarIconButton} size="small">
+                {/* <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
                     })}
                   >
                     account_circle
-                  </Icon>
-                  <VuiTypography
-                    onClick={() => {
-                      signOut(auth);
-                    }}
-                    variant="button"
-                    fontWeight="medium"
-                    color={light ? "white" : "dark"}
-                  >
-                    Logout
-                  </VuiTypography>
-                </IconButton>
-              </Link>
+                  </Icon> */}
+                <VuiTypography
+                  onClick={() => {
+                    localStorage.removeItem("phantom_user");
+                    history.push("/login");
+                  }}
+                  variant="button"
+                  fontWeight="medium"
+                  color={light ? "white" : "dark"}
+                >
+                  Logout
+                </VuiTypography>
+              </IconButton>
+              {/*
+
               <IconButton
                 size="small"
                 color="inherit"
@@ -217,6 +223,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
               </IconButton>
               {renderMenu()}
+              */}
             </VuiBox>
           </VuiBox>
         )}
