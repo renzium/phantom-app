@@ -44,6 +44,7 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -117,19 +118,23 @@ function Basic() {
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton
-                onClick={() => {
-                  setLoading(true);
-                  signInWithEmailAndPassword(auth, user.email, user.password)
-                    .then((res) => {
-                      setLoading(false);
-                      alert("Login Successfully");
-                      history("/dashboard");
-                    })
-                    .catch((err) => {
-                      setLoading(false);
-                      alert("Invalid Credentials");
-                    });
-                }}
+               onClick={() => {
+              setLoading(true);
+              // signInWithEmailAndPassword(auth, user.email, user.password)
+        axios
+          .post("https://phantom-app.herokuapp.com/api/users/login",{email:user.email, password:user.password})
+          .then((res) => {
+            setLoading(false);
+            console.log(res)
+            localStorage.setItem("phantom_user",JSON.stringify(res.data))
+            alert("Login Successfully");
+            history("/dashboard");
+          })
+          .catch((err) => {
+            setLoading(false);
+            alert("Invalid Credentials");
+          });
+            }}
                 variant="gradient"
                 color="info"
                 fullWidth

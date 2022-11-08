@@ -53,6 +53,7 @@ import {
   setOpenConfigurator,
 } from "context";
 
+  import Phantom from "phantom";
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
@@ -104,6 +105,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
+      
       <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
       <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
       <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
@@ -127,73 +129,47 @@ function DashboardNavbar({ absolute, light, isMini }) {
     <AppBar
       position={absolute ? "absolute" : navbarType}
       color="inherit"
-      sx={(theme) => navbar(theme, { transparentNavbar, absolute, light })}
+      sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
-        <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          Dashboard
-          {/* <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} /> */}
-        </VuiBox>
-      
-        <Phantom/>
+        <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
+          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+        </MDBox>
         {isMini ? null : (
-          <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            {/* <VuiBox pr={1}>
-              <VuiInput
-                placeholder="Type here..."
-                icon={{ component: "search", direction: "left" }}
-                sx={({ breakpoints }) => ({
-                  [breakpoints.down("sm")]: {
-                    maxWidth: "80px",
-                  },
-                  [breakpoints.only("sm")]: {
-                    maxWidth: "80px",
-                  },
-                  backgroundColor: "info.main !important",
-                })}
-              />
-            </VuiBox> */}
-            <VuiBox color={light ? "white" : "inherit"}>
-              <IconButton sx={navbarIconButton} size="small">
-                {/* <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light ? white.main : dark.main,
-                    })}
-                  >
-                    account_circle
-                  </Icon> */}
-                <VuiTypography
-                  onClick={() => {
-                    localStorage.removeItem("phantom_user");
-                    history.push("/login");
-                  }}
-                  variant="button"
-                  fontWeight="medium"
-                  color={light ? "white" : "dark"}
-                >
-                  Logout
-                </VuiTypography>
-              </IconButton>
-              {/*
-
+          <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
+            <Phantom />
+            <MDBox pr={1}>
+              <MDInput label="Search here" />
+            </MDBox>
+            <MDBox color={light ? "white" : "inherit"}>
+              <Link to="/authentication/sign-in/basic">
+                <IconButton sx={navbarIconButton} size="small" disableRipple>
+                  <Icon sx={iconsStyle}>account_circle</Icon>
+                </IconButton>
+              </Link>
               <IconButton
                 size="small"
+                disableRipple
                 color="inherit"
                 sx={navbarMobileMenu}
                 onClick={handleMiniSidenav}
               >
-                <Icon className={"text-white"}>{miniSidenav ? "menu_open" : "menu"}</Icon>
+                <Icon sx={iconsStyle} fontSize="medium">
+                  {miniSidenav ? "menu_open" : "menu"}
+                </Icon>
               </IconButton>
               <IconButton
                 size="small"
+                disableRipple
                 color="inherit"
                 sx={navbarIconButton}
                 onClick={handleConfiguratorOpen}
               >
-                <Icon>settings</Icon>
+                <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
               <IconButton
                 size="small"
+                disableRipple
                 color="inherit"
                 sx={navbarIconButton}
                 aria-controls="notification-menu"
@@ -201,12 +177,11 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 variant="contained"
                 onClick={handleOpenMenu}
               >
-                <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
+                <Icon sx={iconsStyle}>notifications</Icon>
               </IconButton>
               {renderMenu()}
-              */}
-            </VuiBox>
-          </VuiBox>
+            </MDBox>
+          </MDBox>
         )}
       </Toolbar>
     </AppBar>

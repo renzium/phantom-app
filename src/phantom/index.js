@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
 // react-router components
-import { Redirect, Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch, useNavigate, useLocation } from "react-router-dom";
 
 const Phantom = () => {
-  let history = useHistory();
+  let history = useNavigate();
 
   const [provider, setProvider] = useState();
   const [walletKey, setWalletKey] = useState();

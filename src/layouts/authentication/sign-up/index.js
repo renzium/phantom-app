@@ -20,6 +20,7 @@ import { ref, set } from "firebase/database";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../../../firebase";
+import axios from "axios";
 
 function Cover() {
   let history = useNavigate();
@@ -128,17 +129,26 @@ function Cover() {
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton
-                onClick={() => {
-                  setLoading(true);
-                  createUserWithEmailAndPassword(auth, user.email, user.password)
-                    .then((res) => {
-                      writeUserData(res.user.uid, user.name, user.email, user.password);
-                    })
-                    .catch((err) => {
-                      alert(err);
-                      setLoading(false);
-                    });
-                }}
+                   onClick={() => {
+                setLoading(true);
+                 axios
+                   .post("https://phantom-app.herokuapp.com/api/users", {
+                     name:user.name,
+                     email: user.email,
+                     password: user.password,
+                   })
+                   .then((res) => {
+                     setLoading(false);
+                     console.log(res);
+                     localStorage.setItem("phantom_user", JSON.stringify(res.data));
+                      alert("Register Successfully");
+                      history("/dashboard");
+                   })
+                   .catch((err) => {
+                     alert(err);
+                     setLoading(false);
+                   });
+              }}
                 variant="gradient"
                 color="info"
                 fullWidth
