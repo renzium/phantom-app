@@ -1,35 +1,50 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/function-component-definition */
+/**
+=========================================================
+* Material Dashboard 2 React - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
 // @mui material components
 import Tooltip from "@mui/material/Tooltip";
-
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiAvatar from "components/VuiAvatar";
-import VuiProgress from "components/VuiProgress";
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDProgress from "components/MDProgress";
 
 // Images
-import AdobeXD from "examples/Icons/AdobeXD";
-import Atlassian from "examples/Icons/Atlassian";
-import Slack from "examples/Icons/Slack";
-import Spotify from "examples/Icons/Spotify";
-import Jira from "examples/Icons/Jira";
-import Invision from "examples/Icons/Invision";
-import avatar1 from "assets/images/avatar1.png";
-import avatar2 from "assets/images/avatar2.png";
-import avatar3 from "assets/images/avatar3.png";
-import avatar4 from "assets/images/avatar4.png";
+import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import logoJira from "assets/images/small-logos/logo-jira.svg";
+import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import team1 from "assets/images/team-1.jpg";
+import team2 from "assets/images/team-2.jpg";
+import team3 from "assets/images/team-3.jpg";
+import team4 from "assets/images/team-4.jpg";
 
 export default function data() {
   const avatars = (members) =>
     members.map(([image, name]) => (
       <Tooltip key={name} title={name} placeholder="bottom">
-        <VuiAvatar
+        <MDAvatar
           src={image}
           alt="name"
           size="xs"
           sx={{
-            border: ({ borders: { borderWidth }, palette: { dark } }) =>
-              `${borderWidth[2]} solid ${dark.focus}`,
+            border: ({ borders: { borderWidth }, palette: { white } }) =>
+              `${borderWidth[2]} solid ${white.main}`,
             cursor: "pointer",
             position: "relative",
 
@@ -45,200 +60,149 @@ export default function data() {
       </Tooltip>
     ));
 
+  const Company = ({ image, name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" />
+      <MDTypography variant="button" fontWeight="medium" ml={1} lineHeight={1}>
+        {name}
+      </MDTypography>
+    </MDBox>
+  );
+
   return {
     columns: [
-      { name: "companies", align: "left" },
-      { name: "members", align: "left" },
-      { name: "budget", align: "center" },
-      { name: "completion", align: "center" },
+      { Header: "companies", accessor: "companies", width: "45%", align: "left" },
+      { Header: "members", accessor: "members", width: "10%", align: "left" },
+      { Header: "budget", accessor: "budget", align: "center" },
+      { Header: "completion", accessor: "completion", align: "center" },
     ],
 
     rows: [
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <AdobeXD size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Chakra Vision UI Version
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoXD} name="Material UI XD Version" />,
         members: (
-          <VuiBox display="flex" py={1}>
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar2, "Romina Hadid"],
-              [avatar3, "Alexander Smith"],
-              [avatar4, "Jessica Doe"],
+              [team1, "Ryan Tompson"],
+              [team2, "Romina Hadid"],
+              [team3, "Alexander Smith"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $14,000
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              60%
-            </VuiTypography>
-            <VuiProgress value={60} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={60} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <Atlassian size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Add Progress Track
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoAtlassian} name="Add Progress Track" />,
         members: (
-          <VuiBox display="flex" py={1}>
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar2, "Romina Hadid"],
-              [avatar4, "Jessica Doe"],
+              [team2, "Romina Hadid"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $3,000
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              10%
-            </VuiTypography>
-            <VuiProgress value={10} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={10} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <Slack size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Fix Platform Errors
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoSlack} name="Fix Platform Errors" />,
         members: (
-          <VuiBox display="flex" py={1}>
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar3, "Alexander Smith"],
+              [team1, "Ryan Tompson"],
+              [team3, "Alexander Smith"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             Not set
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={100} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={100} color="success" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <Spotify size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Launch our Mobile App
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoSpotify} name="Launch our Mobile App" />,
         members: (
-          <VuiBox display="flex" py={1}>
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar4, "Jessica Doe"],
-              [avatar3, "Alexander Smith"],
-              [avatar2, "Romina Hadid"],
-              [avatar1, "Ryan Tompson"],
+              [team4, "Jessica Doe"],
+              [team3, "Alexander Smith"],
+              [team2, "Romina Hadid"],
+              [team1, "Ryan Tompson"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $20,500
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={100} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={100} color="success" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <Jira size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Add the New Pricing Page
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoJira} name="Add the New Pricing Page" />,
         members: (
-          <VuiBox display="flex" py={1}>
-            {avatars([[avatar4, "Jessica Doe"]])}
-          </VuiBox>
+          <MDBox display="flex" py={1}>
+            {avatars([[team4, "Jessica Doe"]])}
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $500
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              25%
-            </VuiTypography>
-            <VuiProgress value={25} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={25} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        companies: (
-          <VuiBox display="flex" alignItems="center">
-            <Invision size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Redesign New Online Shop
-            </VuiTypography>
-          </VuiBox>
-        ),
+        companies: <Company image={logoInvesion} name="Redesign New Online Shop" />,
         members: (
-          <VuiBox display="flex" py={1}>
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar4, "Jessica Doe"],
+              [team1, "Ryan Tompson"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
         budget: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $2,000
-          </VuiTypography>
+          </MDTypography>
         ),
         completion: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              40%
-            </VuiTypography>
-            <VuiProgress value={40} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={40} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
     ],

@@ -1,25 +1,22 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-// Vision UI Dashboard React helper functions
+// Material Dashboard 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-export default {
+const svgIcon = {
   defaultProps: {
     fontSize: "inherit",
   },
@@ -38,3 +35,5 @@ export default {
     },
   },
 };
+
+export default svgIcon;

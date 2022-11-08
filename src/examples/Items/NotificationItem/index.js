@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { forwardRef } from "react";
@@ -23,78 +20,32 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import MenuItem from "@mui/material/MenuItem";
-import Icon from "@mui/material/Icon";
+import Link from "@mui/material/Link";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // custom styles for the NotificationItem
-import { menuItem, menuImage } from "examples/Items/NotificationItem/styles";
+import menuItem from "examples/Items/NotificationItem/styles";
 
-const NotificationItem = forwardRef(({ color, image, title, date, ...rest }, ref) => (
+const NotificationItem = forwardRef(({ icon, title, ...rest }, ref) => (
   <MenuItem {...rest} ref={ref} sx={(theme) => menuItem(theme)}>
-    <VuiBox
-      width="2.25rem"
-      height="2.25rem"
-      mt={0.25}
-      mr={2}
-      mb={0.25}
-      borderRadius="lg"
-      sx={(theme) => menuImage(theme, { color })}
-    >
-      {image}
-    </VuiBox>
-    <VuiBox>
-      <VuiTypography variant="button" textTransform="capitalize" fontWeight="regular">
-        <strong>{title[0]}</strong> {title[1]}
-      </VuiTypography>
-      <VuiTypography
-        variant="caption"
-        color="text"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          mt: 0.5,
-        }}
-      >
-        <VuiTypography variant="button" color="text">
-          <Icon
-            sx={{
-              lineHeight: 1.2,
-              mr: 0.5,
-            }}
-          >
-            watch_later
-          </Icon>
-        </VuiTypography>
-        {date}
-      </VuiTypography>
-    </VuiBox>
+    <MDBox component={Link} py={0.5} display="flex" alignItems="center" lineHeight={1}>
+      <MDTypography variant="body1" color="secondary" lineHeight={0.75}>
+        {icon}
+      </MDTypography>
+      <MDTypography variant="button" fontWeight="regular" sx={{ ml: 1 }}>
+        {title}
+      </MDTypography>
+    </MDBox>
   </MenuItem>
 ));
 
-// Setting default values for the props of NotificationItem
-NotificationItem.defaultProps = {
-  color: "dark",
-};
-
 // Typechecking props for the NotificationItem
 NotificationItem.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-    "text",
-  ]),
-  image: PropTypes.node.isRequired,
-  title: PropTypes.arrayOf(PropTypes.string).isRequired,
-  date: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default NotificationItem;

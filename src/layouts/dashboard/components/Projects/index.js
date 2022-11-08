@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { useState } from "react";
@@ -23,14 +20,13 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { BsCheckCircleFill } from "react-icons/bs";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
-// Vision UI Dashboard Materail-UI example components
-import Table from "examples/Tables/Table";
+// Material Dashboard 2 React examples
+import DataTable from "examples/Tables/DataTable";
 
 // Data
 import data from "layouts/dashboard/components/Projects/data";
@@ -64,46 +60,43 @@ function Projects() {
   );
 
   return (
-    <Card
-      sx={{
-        height: "100% !important",
-      }}
-    >
-      <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="32px">
-        <VuiBox mb="auto">
-          <VuiTypography color="white" variant="lg" mb="6px" gutterBottom>
+    <Card>
+      <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+        <MDBox>
+          <MDTypography variant="h6" gutterBottom>
             Projects
-          </VuiTypography>
-          <VuiBox display="flex" alignItems="center" lineHeight={0}>
-            <BsCheckCircleFill color="green" size="15px" />
-            <VuiTypography variant="button" fontWeight="regular" color="text" ml="5px">
+          </MDTypography>
+          <MDBox display="flex" alignItems="center" lineHeight={0}>
+            <Icon
+              sx={{
+                fontWeight: "bold",
+                color: ({ palette: { info } }) => info.main,
+                mt: -0.5,
+              }}
+            >
+              done
+            </Icon>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 done</strong> this month
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox color="text" px={2}>
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
             more_vert
           </Icon>
-        </VuiBox>
+        </MDBox>
         {renderMenu}
-      </VuiBox>
-      <VuiBox
-        sx={{
-          "& th": {
-            borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-              `${borderWidth[1]} solid ${grey[700]}`,
-          },
-          "& .MuiTableRow-root:not(:last-child)": {
-            "& td": {
-              borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-                `${borderWidth[1]} solid ${grey[700]}`,
-            },
-          },
-        }}
-      >
-        <Table columns={columns} rows={rows} />
-      </VuiBox>
+      </MDBox>
+      <MDBox>
+        <DataTable
+          table={{ columns, rows }}
+          showTotalEntries={false}
+          isSorted={false}
+          noEndBorder
+          entriesPerPage={false}
+        />
+      </MDBox>
     </Card>
   );
 }

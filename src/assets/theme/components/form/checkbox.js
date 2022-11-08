@@ -1,53 +1,45 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-// Vision UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import borders from "assets/theme/base/borders";
 import colors from "assets/theme/base/colors";
 
-// Vision UI Dashboard React helper functions
+// Material Dashboard 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 import linearGradient from "assets/theme/functions/linearGradient";
 
 const { borderWidth, borderColor } = borders;
-const { transparent, gradients, info } = colors;
+const { transparent, info } = colors;
 
-export default {
+const checkbox = {
   styleOverrides: {
     root: {
-      backgroundPosition: "center",
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat",
-      width: pxToRem(20),
-      height: pxToRem(20),
-      marginRight: pxToRem(6),
-      padding: 0,
-      color: transparent.main,
-      border: `${borderWidth[1]} solid ${borderColor}`,
-      borderRadius: pxToRem(5.6),
-      transition: "all 250ms ease",
+      "& .MuiSvgIcon-root": {
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        width: pxToRem(20),
+        height: pxToRem(20),
+        color: transparent.main,
+        border: `${borderWidth[1]} solid ${borderColor}`,
+        borderRadius: pxToRem(5.6),
+      },
 
       "&:hover": {
         backgroundColor: transparent.main,
-      },
-
-      "& .MuiSvgIcon-root": {
-        fill: transparent.main,
       },
 
       "&.Mui-focusVisible": {
@@ -56,35 +48,36 @@ export default {
     },
 
     colorPrimary: {
-      backgroundColor: transparent.main,
+      color: borderColor,
 
       "&.Mui-checked": {
-        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
-          gradients.dark.main,
-          gradients.dark.state
-        )}`,
-        borderColor: gradients.dark.main,
-      },
+        color: info.main,
 
-      "&:hover": {
-        backgroundColor: transparent.main,
+        "& .MuiSvgIcon-root": {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
+            info.main,
+            info.main
+          )}`,
+          borderColor: info.main,
+        },
       },
     },
 
     colorSecondary: {
-      backgroundColor: transparent.main,
+      color: borderColor,
 
-      "&.Mui-checked": {
-        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
-          gradients.dark.main,
-          gradients.dark.state
-        )}`,
-        borderColor: gradients.dark.main,
-      },
-
-      "&:hover": {
-        backgroundColor: transparent.main,
+      "& .MuiSvgIcon-root": {
+        color: info.main,
+        "&.Mui-checked": {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
+            info.main,
+            info.main
+          )}`,
+          borderColor: info.main,
+        },
       },
     },
   },
 };
+
+export default checkbox;

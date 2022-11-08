@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // prop-types is a library for typechecking of props
@@ -22,96 +19,77 @@ import PropTypes from "prop-types";
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiButton from "components/VuiButton";
-import linearGradient from "assets/theme/functions/linearGradient";
-import colors from "assets/theme/base/colors";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+
+// Material Dashboard 2 React context
+import { useMaterialUIController } from "context";
 
 function Bill({ name, company, email, vat, noGutter }) {
-  const { gradients } = colors;
-  const { bill } = gradients;
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
 
   return (
-    <VuiBox
+    <MDBox
       component="li"
       display="flex"
       justifyContent="space-between"
       alignItems="flex-start"
-      sx={{ background: linearGradient(bill.main, bill.state, bill.deg) }}
+      bgColor={darkMode ? "transparent" : "grey-100"}
       borderRadius="lg"
-      p="24px"
-      mb={noGutter ? "0px" : "24px"}
-      mt="20px"
+      p={3}
+      mb={noGutter ? 0 : 1}
+      mt={2}
     >
-      <VuiBox width="100%" display="flex" flexDirection="column">
-        <VuiBox
+      <MDBox width="100%" display="flex" flexDirection="column">
+        <MDBox
           display="flex"
           justifyContent="space-between"
           alignItems={{ xs: "flex-start", sm: "center" }}
           flexDirection={{ xs: "column", sm: "row" }}
-          mb="5px"
+          mb={2}
         >
-          <VuiTypography
-            variant="button"
-            color="white"
-            fontWeight="medium"
-            textTransform="capitalize"
-          >
+          <MDTypography variant="button" fontWeight="medium" textTransform="capitalize">
             {name}
-          </VuiTypography>
+          </MDTypography>
 
-          <VuiBox
-            display="flex"
-            alignItems="center"
-            mt={{ xs: 2, sm: 0 }}
-            ml={{ xs: -1.5, sm: 0 }}
-            sx={({ breakpoints }) => ({
-              [breakpoints.only("sm")]: {
-                flexDirection: "column",
-              },
-            })}
-          >
-            <VuiBox mr={1}>
-              <VuiButton variant="text" color="error">
-                <Icon sx={{ mr: "4px" }}>delete</Icon>&nbsp;DELETE
-              </VuiButton>
-            </VuiBox>
-            <VuiButton variant="text" color="text">
-              <Icon sx={{ mr: "4px" }}>edit</Icon>&nbsp;EDIT
-            </VuiButton>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox mb={1} lineHeight={0}>
-          <VuiTypography variant="caption" color="text">
+          <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
+            <MDBox mr={1}>
+              <MDButton variant="text" color="error">
+                <Icon>delete</Icon>&nbsp;delete
+              </MDButton>
+            </MDBox>
+            <MDButton variant="text" color={darkMode ? "white" : "dark"}>
+              <Icon>edit</Icon>&nbsp;edit
+            </MDButton>
+          </MDBox>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
             Company Name:&nbsp;&nbsp;&nbsp;
-            <VuiTypography
-              variant="caption"
-              color="text"
-              fontWeight="regular"
-              textTransform="capitalize"
-            >
+            <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
               {company}
-            </VuiTypography>
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox mb={1} lineHeight={0}>
-          <VuiTypography variant="caption" color="text">
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
             Email Address:&nbsp;&nbsp;&nbsp;
-            <VuiTypography variant="caption" fontWeight="regular" color="text">
+            <MDTypography variant="caption" fontWeight="medium">
               {email}
-            </VuiTypography>
-          </VuiTypography>
-        </VuiBox>
-        <VuiTypography variant="caption" color="text">
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
+        <MDTypography variant="caption" color="text">
           VAT Number:&nbsp;&nbsp;&nbsp;
-          <VuiTypography variant="caption" fontWeight="regular" color="text">
+          <MDTypography variant="caption" fontWeight="medium">
             {vat}
-          </VuiTypography>
-        </VuiTypography>
-      </VuiBox>
-    </VuiBox>
+          </MDTypography>
+        </MDTypography>
+      </MDBox>
+    </MDBox>
   );
 }
 

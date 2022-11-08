@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // react-router-dom components
@@ -23,23 +20,25 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // @mui material components
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 import Tooltip from "@mui/material/Tooltip";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiButton from "components/VuiButton";
-import VuiAvatar from "components/VuiAvatar";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+import MDAvatar from "components/MDAvatar";
 
 function DefaultProjectCard({ image, label, title, description, action, authors }) {
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <VuiAvatar
+      <MDAvatar
         src={media}
         alt={name}
         size="xs"
-        sx={({ borders: { borderWidth }, palette: { dark }, functions: { rgba } }) => ({
-          border: `${borderWidth[2]} solid ${rgba(dark.focus, 0.5)}`,
+        sx={({ borders: { borderWidth }, palette: { white } }) => ({
+          border: `${borderWidth[2]} solid ${white.main}`,
           cursor: "pointer",
           position: "relative",
           ml: -1.25,
@@ -53,71 +52,64 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
   ));
 
   return (
-    <VuiBox
+    <Card
       sx={{
         display: "flex",
         flexDirection: "column",
+        backgroundColor: "transparent",
         boxShadow: "none",
         overflow: "visible",
       }}
     >
-      <VuiBox
-        component="img"
-        src={image}
-        mb="8px"
-        borderRadius="15px"
-        sx={({ breakpoints }) => ({
-          [breakpoints.up("xl")]: {
-            height: "200px",
-          },
-        })}
-      />
-
-      <VuiBox
-        sx={({ breakpoints }) => ({
-          [breakpoints.only("xl")]: {
-            minHeight: "200px",
-          },
-        })}
-      >
-        <VuiBox>
-          <VuiTypography variant="xxs" color="text" fontWeight="medium" textTransform="capitalize">
-            {label}
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox mb={1}>
+      <MDBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+        <CardMedia
+          src={image}
+          component="img"
+          title={title}
+          sx={{
+            maxWidth: "100%",
+            margin: 0,
+            boxShadow: ({ boxShadows: { md } }) => md,
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+      </MDBox>
+      <MDBox mt={1} mx={0.5}>
+        <MDTypography variant="button" fontWeight="regular" color="text" textTransform="capitalize">
+          {label}
+        </MDTypography>
+        <MDBox mb={1}>
           {action.type === "internal" ? (
-            <VuiTypography
+            <MDTypography
               component={Link}
               to={action.route}
               variant="h5"
-              color="white"
               textTransform="capitalize"
             >
               {title}
-            </VuiTypography>
+            </MDTypography>
           ) : (
-            <VuiTypography
+            <MDTypography
               component="a"
               href={action.route}
               target="_blank"
               rel="noreferrer"
-              color="white"
               variant="h5"
               textTransform="capitalize"
             >
               {title}
-            </VuiTypography>
+            </MDTypography>
           )}
-        </VuiBox>
-        <VuiBox mb={3} lineHeight={0}>
-          <VuiTypography variant="button" fontWeight="regular" color="text">
+        </MDBox>
+        <MDBox mb={3} lineHeight={0}>
+          <MDTypography variant="button" fontWeight="light" color="text">
             {description}
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox display="flex" justifyContent="space-between" alignItems="center">
+          </MDTypography>
+        </MDBox>
+        <MDBox display="flex" justifyContent="space-between" alignItems="center">
           {action.type === "internal" ? (
-            <VuiButton
+            <MDButton
               component={Link}
               to={action.route}
               variant="outlined"
@@ -125,9 +117,9 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </VuiButton>
+            </MDButton>
           ) : (
-            <VuiButton
+            <MDButton
               component="a"
               href={action.route}
               target="_blank"
@@ -137,12 +129,12 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </VuiButton>
+            </MDButton>
           )}
-          <VuiBox display="flex">{renderAuthors}</VuiBox>
-        </VuiBox>
-      </VuiBox>
-    </VuiBox>
+          <MDBox display="flex">{renderAuthors}</MDBox>
+        </MDBox>
+      </MDBox>
+    </Card>
   );
 }
 
@@ -161,8 +153,8 @@ DefaultProjectCard.propTypes = {
     type: PropTypes.oneOf(["external", "internal"]),
     route: PropTypes.string.isRequired,
     color: PropTypes.oneOf([
-      "white",
-      "text",
+      "primary",
+      "secondary",
       "info",
       "success",
       "warning",

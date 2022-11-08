@@ -1,54 +1,35 @@
-import { useState } from "react";
-
-// react-router-dom components
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // @mui material components
-import Icon from "@mui/material/Icon";
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
+import Card from "@mui/material/Card";
+import Checkbox from "@mui/material/Checkbox";
 
-// Icons
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
-
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiInput from "components/VuiInput";
-import VuiButton from "components/VuiButton";
-import VuiSwitch from "components/VuiSwitch";
-import GradientBorder from "examples/GradientBorder";
-
-// Vision UI Dashboard assets
-import radialGradient from "assets/theme/functions/radialGradient";
-import rgba from "assets/theme/functions/rgba";
-import palette from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDButton from "components/MDButton";
+import MDInput from "components/MDInput";
+import MDTypography from "components/MDTypography";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import ClipLoader from "react-spinners/ClipLoader";
 
 // Images
-import bgSignIn from "assets/images/signUpImage.png";
-import { db } from "firebase";
-import { ref, set } from "firebase/database";
-import { TextField } from "@mui/material";
+import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "firebase";
-import axios from "axios";
+import { ref, set } from "firebase/database";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { db, auth } from "../../../firebase";
 
-function SignIn() {
-  const [rememberMe, setRememberMe] = useState(true);
-  let history = useHistory();
+function Cover() {
+  let history = useNavigate();
 
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
     name: "",
   });
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-  const [loading, setLoading] = useState(false);
   function writeUserData(userId, name, email, password) {
     set(ref(db, "users/" + userId), {
       username: name,
@@ -56,138 +37,135 @@ function SignIn() {
       password: password,
     });
     setLoading(false);
-    history.push("/login");
+    history("/");
   }
+
   return (
-    <CoverLayout
-      title="Welcome!"
-      color="white"
-      description="Use these awesome forms to login or create new account in your project for free."
-      image={bgSignIn}
-      premotto="INSPIRED BY THE FUTURE:"
-      motto="THE VISION UI DASHBOARD"
-      cardContent
-    >
-      <GradientBorder borderRadius={borders.borderRadius.form} minWidth="100%" maxWidth="100%">
-        <VuiBox
-          component="form"
-          role="form"
-          borderRadius="inherit"
-          p="45px"
-          sx={({ palette: { secondary } }) => ({
-            backgroundColor: secondary.focus,
-          })}
+    <CoverLayout image={bgImage}>
+      <Card>
+        <MDBox
+          variant="gradient"
+          bgColor="info"
+          borderRadius="lg"
+          coloredShadow="success"
+          mx={2}
+          mt={-3}
+          p={3}
+          mb={1}
+          textAlign="center"
         >
-          <VuiBox mb={2}>
-            <VuiBox mb={1} ml={0.5}>
-              <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                Name
-              </VuiTypography>
-            </VuiBox>
-            <TextField
-              fullWidth
-              onChange={(e) => {
-                setUser((prev) => ({
-                  ...prev,
-                  name: e.target.value,
-                }));
-              }}
-              variant="outlined"
-            />
-          </VuiBox>
-          <VuiBox mb={2}>
-            <VuiBox mb={1} ml={0.5}>
-              <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                Email
-              </VuiTypography>
-            </VuiBox>
-            <TextField
-              fullWidth
-              onChange={(e) => {
-                setUser((prev) => ({
-                  ...prev,
-                  email: e.target.value,
-                }));
-              }}
-              variant="outlined"
-            />
-          </VuiBox>
-          <VuiBox mb={2}>
-            <VuiBox mb={1} ml={0.5}>
-              <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                Password
-              </VuiTypography>
-            </VuiBox>
-            <TextField
-              fullWidth
-              onChange={(e) => {
-                setUser((prev) => ({
-                  ...prev,
-                  password: e.target.value,
-                }));
-              }}
-              variant="outlined"
-            />
-          </VuiBox>
-          <VuiBox display="flex" alignItems="center">
-            <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
-            <VuiTypography
-              variant="caption"
-              color="white"
-              fontWeight="medium"
-              onClick={handleSetRememberMe}
-              sx={{ cursor: "pointer", userSelect: "none" }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;Remember me
-            </VuiTypography>
-          </VuiBox>
-          <VuiBox mt={4} mb={1}>
-            <VuiButton
-              onClick={() => {
-                setLoading(true);
-                 axios
-                   .post("https://phantom-app.herokuapp.com/api/users", {
-                     name:user.name,
-                     email: user.email,
-                     password: user.password,
-                   })
-                   .then((res) => {
-                     setLoading(false);
-                     console.log(res);
-                     localStorage.setItem("phantom_user", JSON.stringify(res.data));
-                      alert("Register Successfully");
-                      history.push("/dashboard");
-                   })
-                   .catch((err) => {
-                     alert(err);
-                     setLoading(false);
-                   });
-              }}
-              color="info"
-              fullWidth
-            >
-              <ClipLoader loading={loading} size={25} />
-              <b> </b> SIGN UP
-            </VuiButton>
-          </VuiBox>
-          <VuiBox mt={3} textAlign="center">
-            <VuiTypography variant="button" color="text" fontWeight="regular">
-              Already have an account?{" "}
-              <VuiTypography
-                component={Link}
-                to="/login"
+          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+            Join us today
+          </MDTypography>
+          <MDTypography display="block" variant="button" color="white" my={1}>
+            Enter your email and password to register
+          </MDTypography>
+        </MDBox>
+        <MDBox pt={4} pb={3} px={3}>
+          <MDBox component="form" role="form">
+            <MDBox mb={2}>
+              <MDInput
+                onChange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }));
+                }}
+                type="text"
+                label="Name"
+                variant="standard"
+                fullWidth
+              />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                onChange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
+                type="email"
+                label="Email"
+                variant="standard"
+                fullWidth
+              />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                onChange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }));
+                }}
+                type="password"
+                label="Password"
+                variant="standard"
+                fullWidth
+              />
+            </MDBox>
+            <MDBox display="flex" alignItems="center" ml={-1}>
+              <Checkbox />
+              <MDTypography
                 variant="button"
-                color="white"
-                fontWeight="medium"
+                fontWeight="regular"
+                color="text"
+                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                Sign in
-              </VuiTypography>
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-      </GradientBorder>
+                &nbsp;&nbsp;I agree the&nbsp;
+              </MDTypography>
+              <MDTypography
+                component="a"
+                href="#"
+                variant="button"
+                fontWeight="bold"
+                color="info"
+                textGradient
+              >
+                Terms and Conditions
+              </MDTypography>
+            </MDBox>
+            <MDBox mt={4} mb={1}>
+              <MDButton
+                onClick={() => {
+                  setLoading(true);
+                  createUserWithEmailAndPassword(auth, user.email, user.password)
+                    .then((res) => {
+                      writeUserData(res.user.uid, user.name, user.email, user.password);
+                    })
+                    .catch((err) => {
+                      alert(err);
+                      setLoading(false);
+                    });
+                }}
+                variant="gradient"
+                color="info"
+                fullWidth
+              >
+                sign in
+              </MDButton>
+            </MDBox>
+            <MDBox mt={3} mb={1} textAlign="center">
+              <MDTypography variant="button" color="text">
+                Already have an account?{" "}
+                <MDTypography
+                  component={Link}
+                  to="/"
+                  variant="button"
+                  color="info"
+                  fontWeight="medium"
+                  textGradient
+                >
+                  Sign In
+                </MDTypography>
+              </MDTypography>
+            </MDBox>
+          </MDBox>
+        </MDBox>
+      </Card>
     </CoverLayout>
   );
 }
 
-export default SignIn;
+export default Cover;

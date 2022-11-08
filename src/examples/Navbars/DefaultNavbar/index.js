@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { useState, useEffect } from "react";
@@ -28,23 +25,25 @@ import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiButton from "components/VuiButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
-// Vision UI Dashboard React example components
+// Material Dashboard 2 React example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
-// Vision UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+
+// Material Dashboard 2 React context
+import { useMaterialUIController } from "context";
 
 function DefaultNavbar({ transparent, light, action }) {
-  const { borderCol } = colors;
-  const { borderWidth } = borders;
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
+
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
 
@@ -78,57 +77,62 @@ function DefaultNavbar({ transparent, light, action }) {
 
   return (
     <Container>
-      <VuiBox
-        py={2}
-        px={{ xs: transparent ? 4 : 3, sm: transparent ? 2 : 3, lg: transparent ? 0 : 3 }}
-        my={2}
-        border={`${borderWidth[1]} solid ${borderCol.navbar}`}
+      <MDBox
+        py={1}
+        px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
+        my={3}
+        mx={3}
         width="calc(100% - 48px)"
-        borderRadius="xl"
+        borderRadius="lg"
         shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         position="absolute"
-        left="50%"
+        left={0}
         zIndex={3}
-        maxWidth="1044px"
-        sx={({ palette: { gradients }, functions: { linearGradient } }) => ({
-          backgroundColor: linearGradient(
-            gradients.navbar.main,
-            gradients.navbar.state,
-            gradients.navbar.deg
-          ),
-          backdropFilter: "blur(42px)",
-          transform: "translate(-50%, 0px)",
+        sx={({
+          palette: { transparent: transparentColor, white, background },
+          functions: { rgba },
+        }) => ({
+          backgroundColor: transparent
+            ? transparentColor.main
+            : rgba(darkMode ? background.sidenav : white.main, 0.8),
+          backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <VuiBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <VuiTypography
-            variant="button"
-            textGradient={true}
-            color="logo"
-            fontSize={14}
-            letterSpacing={2}
-            fontWeight="medium"
-            sx={{
-              margin: "0 auto",
-            }}
-          >
-            VISION UI FREE
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" />
-          <DefaultNavbarLink icon="account_circle" name="sign up" route="/authentication/sign-up" />
-          <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-in" />
-        </VuiBox>
+        <MDBox
+          component={Link}
+          to="/"
+          py={transparent ? 1.5 : 0.75}
+          lineHeight={1}
+          pl={{ xs: 0, lg: 1 }}
+        >
+          <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+            Material Dashboard 2
+          </MDTypography>
+        </MDBox>
+        <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
+          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
+          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
+          <DefaultNavbarLink
+            icon="account_circle"
+            name="sign up"
+            route="/authentication/sign-up"
+            light={light}
+          />
+          <DefaultNavbarLink
+            icon="key"
+            name="sign in"
+            route="/authentication/sign-in"
+            light={light}
+          />
+        </MDBox>
         {action &&
           (action.type === "internal" ? (
-            <VuiBox display={{ xs: "none", lg: "inline-block" }}>
-              <VuiButton
+            <MDBox display={{ xs: "none", lg: "inline-block" }}>
+              <MDButton
                 component={Link}
                 to={action.route}
                 variant="gradient"
@@ -136,25 +140,25 @@ function DefaultNavbar({ transparent, light, action }) {
                 size="small"
               >
                 {action.label}
-              </VuiButton>
-            </VuiBox>
+              </MDButton>
+            </MDBox>
           ) : (
-            <VuiBox display={{ xs: "none", lg: "inline-block" }}>
-              <VuiButton
+            <MDBox display={{ xs: "none", lg: "inline-block" }}>
+              <MDButton
                 component="a"
                 href={action.route}
                 target="_blank"
                 rel="noreferrer"
+                variant="gradient"
                 color={action.color ? action.color : "info"}
-                sx={({ typography: { size }, functions: { pxToRem } }) => ({
-                  fontSize: pxToRem(size.sm),
-                })}
+                size="small"
+                sx={{ mt: -0.3 }}
               >
                 {action.label}
-              </VuiButton>
-            </VuiBox>
+              </MDButton>
+            </MDBox>
           ))}
-        <VuiBox
+        <MDBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}
           py={1.5}
@@ -163,16 +167,9 @@ function DefaultNavbar({ transparent, light, action }) {
           sx={{ cursor: "pointer" }}
           onClick={openMobileNavbar}
         >
-          <Icon
-            sx={({ palette: { white } }) => ({
-              color: white.main,
-            })}
-            fontSize="default"
-          >
-            {mobileNavbar ? "close" : "menu"}
-          </Icon>
-        </VuiBox>
-      </VuiBox>
+          <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
+        </MDBox>
+      </MDBox>
       {mobileView && <DefaultNavbarMobile open={mobileNavbar} close={closeMobileNavbar} />}
     </Container>
   );
@@ -188,6 +185,7 @@ DefaultNavbar.defaultProps = {
 // Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
   transparent: PropTypes.bool,
+  light: PropTypes.bool,
   action: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

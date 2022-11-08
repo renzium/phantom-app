@@ -1,58 +1,59 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import { IoDocumentText } from "react-icons/io5";
+// @mui material components
+import Icon from "@mui/material/Icon";
 
-function Invoice({ date, id, price }) {
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+
+function Invoice({ date, id, price, noGutter }) {
   return (
-    <VuiBox
+    <MDBox
       component="li"
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      mb="32px"
+      py={1}
+      pr={1}
+      mb={noGutter ? 0 : 1}
     >
-      <VuiBox lineHeight={1}>
-        <VuiTypography display="block" variant="button" fontWeight="medium" color="white">
+      <MDBox lineHeight={1.125}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
           {date}
-        </VuiTypography>
-        <VuiTypography variant="caption" fontWeight="regular" color="text">
+        </MDTypography>
+        <MDTypography variant="caption" fontWeight="regular" color="text">
           {id}
-        </VuiTypography>
-      </VuiBox>
-      <VuiBox display="flex" alignItems="center">
-        <VuiTypography variant="button" fontWeight="regular" color="text">
+        </MDTypography>
+      </MDBox>
+      <MDBox display="flex" alignItems="center">
+        <MDTypography variant="button" fontWeight="regular" color="text">
           {price}
-        </VuiTypography>
-        <VuiBox display="flex" alignItems="center" lineHeight={0} ml={3} sx={{ cursor: "poiner" }}>
-          <IoDocumentText color="#fff" size="15px" />
-          <VuiTypography variant="button" fontWeight="medium" color="text">
+        </MDTypography>
+        <MDBox display="flex" alignItems="center" lineHeight={1} ml={3} sx={{ cursor: "pointer" }}>
+          <Icon fontSize="small">picture_as_pdf</Icon>
+          <MDTypography variant="button" fontWeight="bold">
             &nbsp;PDF
-          </VuiTypography>
-        </VuiBox>
-      </VuiBox>
-    </VuiBox>
+          </MDTypography>
+        </MDBox>
+      </MDBox>
+    </MDBox>
   );
 }
 

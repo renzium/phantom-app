@@ -1,37 +1,44 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // @mui material components
 import Drawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
-import linearGradient from "assets/theme/functions/linearGradient";
 
 export default styled(Drawer)(({ theme, ownerState }) => {
   const { palette, boxShadows, transitions, breakpoints, functions } = theme;
-  const { transparentSidenav, miniSidenav } = ownerState;
+  const { transparentSidenav, whiteSidenav, miniSidenav, darkMode } = ownerState;
 
   const sidebarWidth = 250;
-  const { transparent, gradients } = palette;
+  const { transparent, gradients, white, background } = palette;
   const { xxl } = boxShadows;
-  const { pxToRem } = functions;
+  const { pxToRem, linearGradient } = functions;
+
+  let backgroundValue = darkMode
+    ? background.sidenav
+    : linearGradient(gradients.dark.main, gradients.dark.state);
+
+  if (transparentSidenav) {
+    backgroundValue = transparent.main;
+  } else if (whiteSidenav) {
+    backgroundValue = white.main;
+  }
 
   // styles for the sidenav when miniSidenav={false}
   const drawerOpenStyles = () => ({
+    background: backgroundValue,
     transform: "translateX(0)",
     transition: transitions.create("transform", {
       easing: transitions.easing.sharp,
@@ -53,6 +60,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   // styles for the sidenav when miniSidenav={true}
   const drawerCloseStyles = () => ({
+    background: backgroundValue,
     transform: `translateX(${pxToRem(-320)})`,
     transition: transitions.create("transform", {
       easing: transitions.easing.sharp,
@@ -77,14 +85,6 @@ export default styled(Drawer)(({ theme, ownerState }) => {
     "& .MuiDrawer-paper": {
       boxShadow: xxl,
       border: "none",
-      background: transparentSidenav
-      ? transparent.main
-      : linearGradient(
-            gradients.sidenav.main,
-            gradients.sidenav.state,
-            gradients.sidenav.deg
-          ),
-    backdropFilter: transparentSidenav ? "unset" : "blur(120px)",
       ...(miniSidenav ? drawerCloseStyles() : drawerOpenStyles()),
     },
   };

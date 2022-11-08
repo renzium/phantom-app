@@ -1,35 +1,32 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-// Vision UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import colors from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
 import boxShadows from "assets/theme/base/boxShadows";
 
-// Vision UI Dashboard React helper functions
-import linearGradient from "assets/theme/functions/linearGradient";
+// Material Dashboard 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
+import boxShadow from "assets/theme/functions/boxShadow";
 
-const { light, white, sliderColors, black, gradients } = colors;
+const { grey, white, black, info } = colors;
 const { borderRadius, borderWidth } = borders;
 const { sliderBoxShadow } = boxShadows;
 
-export default {
+const slider = {
   styleOverrides: {
     root: {
       width: "100%",
@@ -44,32 +41,41 @@ export default {
     },
 
     rail: {
-      height: pxToRem(3),
-      backgroundColor: light.main,
+      height: pxToRem(2),
+      background: grey[200],
       borderRadius: borderRadius.sm,
+      opacity: 1,
     },
 
     track: {
-      backgroundImage: linearGradient(gradients.info.main, gradients.info.state),
-      height: pxToRem(6),
+      background: info.main,
+      height: pxToRem(2),
       position: "relative",
-      top: pxToRem(2),
       border: "none",
       borderRadius: borderRadius.lg,
       zIndex: 1,
     },
 
     thumb: {
-      width: pxToRem(15),
-      height: pxToRem(15),
+      width: pxToRem(14),
+      height: pxToRem(14),
       backgroundColor: white.main,
       zIndex: 10,
       boxShadow: sliderBoxShadow.thumb,
-      border: `${borderWidth[1]} solid ${sliderColors.thumb.borderColor}`,
+      border: `${borderWidth[1]} solid ${info.main}`,
+      transition: "all 200ms linear",
 
       "&:hover": {
         boxShadow: "none",
       },
+
+      "&:active": {
+        transform: "translate(-50%, -50%) scale(1.4)",
+      },
+
+      "&.Mui-active": { boxShadow: boxShadow([0, 0], [0, 14], info.main, 0.16) },
     },
   },
 };
+
+export default slider;

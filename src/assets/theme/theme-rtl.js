@@ -1,25 +1,23 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // @mui material components
 import { createTheme } from "@mui/material/styles";
+// import Fade from "@mui/material/Fade";
 
-// Vision UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import colors from "assets/theme/base/colors";
 import breakpoints from "assets/theme/base/breakpoints";
 import typography from "assets/theme/base/typography";
@@ -27,14 +25,14 @@ import boxShadows from "assets/theme/base/boxShadows";
 import borders from "assets/theme/base/borders";
 import globals from "assets/theme/base/globals";
 
-// Vision UI Dashboard React helper functions
+// Material Dashboard 2 React helper functions
 import boxShadow from "assets/theme/functions/boxShadow";
 import hexToRgb from "assets/theme/functions/hexToRgb";
 import linearGradient from "assets/theme/functions/linearGradient";
 import pxToRem from "assets/theme/functions/pxToRem";
 import rgba from "assets/theme/functions/rgba";
 
-// Vision UI Dashboard React components base styles for @mui material components
+// Material Dashboard 2 React components base styles for @mui material components
 import sidenav from "assets/theme/components/sidenav";
 import list from "assets/theme/components/list";
 import listItem from "assets/theme/components/list/listItem";
@@ -44,7 +42,10 @@ import cardMedia from "assets/theme/components/card/cardMedia";
 import cardContent from "assets/theme/components/card/cardContent";
 import button from "assets/theme/components/button";
 import iconButton from "assets/theme/components/iconButton";
-import inputBase from "assets/theme/components/form/inputBase";
+import input from "assets/theme/components/form/input";
+import inputLabel from "assets/theme/components/form/inputLabel";
+import inputOutlined from "assets/theme/components/form/inputOutlined";
+import textField from "assets/theme/components/form/textField";
 import menu from "assets/theme/components/menu";
 import menuItem from "assets/theme/components/menu/menuItem";
 import switchButton from "assets/theme/components/form/switchButton";
@@ -71,13 +72,17 @@ import formLabel from "assets/theme/components/form/formLabel";
 import checkbox from "assets/theme/components/form/checkbox";
 import radio from "assets/theme/components/form/radio";
 import autocomplete from "assets/theme/components/form/autocomplete";
-import input from "assets/theme/components/form/input";
 import container from "assets/theme/components/container";
 import popover from "assets/theme/components/popover";
 import buttonBase from "assets/theme/components/buttonBase";
 import icon from "assets/theme/components/icon";
 import svgIcon from "assets/theme/components/svgIcon";
 import link from "assets/theme/components/link";
+import dialog from "assets/theme/components/dialog";
+import dialogTitle from "assets/theme/components/dialog/dialogTitle";
+import dialogContent from "assets/theme/components/dialog/dialogContent";
+import dialogContentText from "assets/theme/components/dialog/dialogContentText";
+import dialogActions from "assets/theme/components/dialog/dialogActions";
 
 export default createTheme({
   direction: "rtl",
@@ -110,7 +115,10 @@ export default createTheme({
     MuiCardContent: { ...cardContent },
     MuiButton: { ...button },
     MuiIconButton: { ...iconButton },
-    MuiInputBase: { ...inputBase },
+    MuiInput: { ...input },
+    MuiInputLabel: { ...inputLabel },
+    MuiOutlinedInput: { ...inputOutlined },
+    MuiTextField: { ...textField },
     MuiMenu: { ...menu },
     MuiMenuItem: { ...menuItem },
     MuiSwitch: { ...switchButton },
@@ -137,13 +145,15 @@ export default createTheme({
     MuiCheckbox: { ...checkbox },
     MuiRadio: { ...radio },
     MuiAutocomplete: { ...autocomplete },
-    MuiInput: { ...input },
-    MuiOutlinedInput: { ...input },
-    MuiFilledInput: { ...input },
     MuiPopover: { ...popover },
     MuiButtonBase: { ...buttonBase },
     MuiIcon: { ...icon },
     MuiSvgIcon: { ...svgIcon },
     MuiLink: { ...link },
+    MuiDialog: { ...dialog },
+    MuiDialogTitle: { ...dialogTitle },
+    MuiDialogContent: { ...dialogContent },
+    MuiDialogContentText: { ...dialogContentText },
+    MuiDialogActions: { ...dialogActions },
   },
 });

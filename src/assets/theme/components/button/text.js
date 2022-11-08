@@ -1,48 +1,43 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-// Vision UI Dashboard React Base Styles
+// Material Dashboard 2 React Base Styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-// Vision UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { transparent, primary, grey, text } = colors;
+const { text, info, secondary, transparent } = colors;
 const { size } = typography;
 
-export default {
+const buttonText = {
   base: {
     backgroundColor: transparent.main,
-    height: "max-content",
+    minHeight: pxToRem(40),
     color: text.main,
     boxShadow: "none",
-    padding: `${pxToRem(6)} ${pxToRem(12)}`,
+    padding: `${pxToRem(10)} ${pxToRem(24)}`,
 
     "&:hover": {
       backgroundColor: transparent.main,
       boxShadow: "none",
-      color: text.focus,
     },
 
     "&:focus": {
       boxShadow: "none",
-      color: text.focus,
     },
 
     "&:active, &:active:focus, &:active:hover": {
@@ -51,60 +46,59 @@ export default {
     },
 
     "&:disabled": {
-      color: grey[600],
       boxShadow: "none",
     },
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(16)} !important`,
     },
   },
 
   small: {
+    minHeight: pxToRem(32),
+    padding: `${pxToRem(6)} ${pxToRem(16)}`,
     fontSize: size.xs,
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(12)} !important`,
     },
   },
 
   large: {
+    minHeight: pxToRem(47),
+    padding: `${pxToRem(12)} ${pxToRem(28)}`,
     fontSize: size.sm,
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(22)} !important`,
     },
   },
 
   primary: {
-    color: primary.main,
-    backgroundColor: transparent.main,
+    color: info.main,
 
     "&:hover": {
-      color: primary.focus,
-      backgroundColor: transparent.main,
+      color: info.main,
     },
 
     "&:focus:not(:hover)": {
-      color: primary.focus,
-      backgroundColor: transparent.focus,
+      color: info.focus,
       boxShadow: "none",
     },
   },
 
   secondary: {
-    color: text.secondary,
-    backgroundColor: transparent.main,
+    color: secondary.main,
 
     "&:hover": {
-      color: text.secondary,
-      backgroundColor: transparent.main,
+      color: secondary.main,
     },
 
     "&:focus:not(:hover)": {
-      color: text.secondary,
-      backgroundColor: transparent.focus,
+      color: secondary.focus,
       boxShadow: "none",
     },
   },
 };
+
+export default buttonText;

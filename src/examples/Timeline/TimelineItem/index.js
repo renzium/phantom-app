@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // prop-types is a library for typechecking of props
@@ -22,76 +19,62 @@ import PropTypes from "prop-types";
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiBadge from "components/VuiBadge";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // Timeline context
 import { useTimeline } from "examples/Timeline/context";
 
 // Custom styles for the TimelineItem
-import { timelineItem } from "examples/Timeline/TimelineItem/styles";
+import timelineItem from "examples/Timeline/TimelineItem/styles";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem }) {
+function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
   const isDark = useTimeline();
 
-  const renderBadges =
-    badges.length > 0
-      ? badges.map((badge, key) => {
-          const badgeKey = `badge-${key}`;
-
-          return (
-            <VuiBox key={badgeKey} mr={key === badges.length - 1 ? 0 : 0.5}>
-              <VuiBadge color={color} size="xs" badgeContent={badge} container />
-            </VuiBox>
-          );
-        })
-      : null;
-
   return (
-    <VuiBox position="relative" mb="24px" sx={(theme) => timelineItem(theme, { color })}>
-      <VuiBox
-        width="1.625rem"
-        height="1.625rem"
+    <MDBox position="relative" mb={3} sx={(theme) => timelineItem(theme, { lastItem, isDark })}>
+      <MDBox
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgColor={color}
+        color="white"
+        width="2rem"
+        height="2rem"
         borderRadius="50%"
         position="absolute"
-        top="3.25%"
-        left="-8px"
+        top="8%"
+        left="2px"
         zIndex={2}
+        sx={{ fontSize: ({ typography: { size } }) => size.sm }}
       >
-        {icon}
-      </VuiBox>
-      <VuiBox ml="30px" pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-        <VuiTypography variant="button" fontWeight="medium" color="white">
+        <Icon fontSize="inherit">{icon}</Icon>
+      </MDBox>
+      <MDBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
+        <MDTypography variant="button" fontWeight="medium" color={isDark ? "white" : "dark"}>
           {title}
-        </VuiTypography>
-        <VuiBox mt={0.5}>
-          <VuiTypography variant="caption" fontWeight="medium" color="text">
+        </MDTypography>
+        <MDBox mt={0.5}>
+          <MDTypography variant="caption" color={isDark ? "secondary" : "text"}>
             {dateTime}
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox mt={2} mb={1.5}>
+          </MDTypography>
+        </MDBox>
+        <MDBox mt={2} mb={1.5}>
           {description ? (
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+            <MDTypography variant="button" color={isDark ? "white" : "dark"}>
               {description}
-            </VuiTypography>
+            </MDTypography>
           ) : null}
-        </VuiBox>
-        {badges.length > 0 ? (
-          <VuiBox display="flex" pb={lastItem ? 1 : 2}>
-            {renderBadges}
-          </VuiBox>
-        ) : null}
-      </VuiBox>
-    </VuiBox>
+        </MDBox>
+      </MDBox>
+    </MDBox>
   );
 }
 
 // Setting default values for the props of TimelineItem
 TimelineItem.defaultProps = {
   color: "info",
-  badges: [],
   lastItem: false,
   description: "",
 };
@@ -112,7 +95,6 @@ TimelineItem.propTypes = {
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.string.isRequired,
   description: PropTypes.string,
-  badges: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   lastItem: PropTypes.bool,
 };
 

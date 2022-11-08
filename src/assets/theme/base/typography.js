@@ -1,55 +1,53 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 /**
- * The base typography styles for the Vision UI Dashboard  Material.
+ * The base typography styles for the Material Dashboard 2 PRO React.
  * You can add new typography style using this file.
- * You can customized the typography styles for the entire Vision UI Dashboard  Material using thie file.
+ * You can customized the typography styles for the entire Material Dashboard 2 PRO React using thie file.
  */
 
-// Vision UI Dashboard React Base Styles
-
+// Material Dashboard 2 React Base Styles
 import colors from "assets/theme/base/colors";
-import "./typography.css";
 
-// Vision UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
 const { dark } = colors;
 
 const baseProperties = {
-  fontFamily: '"Plus Jakarta Display", "Helvetica", "Arial", sans-serif',
+  fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  fontWeightLighter: 100,
   fontWeightLight: 300,
   fontWeightRegular: 400,
-  fontWeightMedium: 500,
+  fontWeightMedium: 600,
   fontWeightBold: 700,
   fontSizeXXS: pxToRem(10.4),
   fontSizeXS: pxToRem(12),
   fontSizeSM: pxToRem(14),
-  fontSizeRegular: pxToRem(16),
+  fontSizeMD: pxToRem(16),
   fontSizeLG: pxToRem(18),
   fontSizeXL: pxToRem(20),
+  fontSize2XL: pxToRem(24),
+  fontSize3XL: pxToRem(30),
 };
 
 const baseHeadingProperties = {
   fontFamily: baseProperties.fontFamily,
   color: dark.main,
-  fontWeight: baseProperties.fontWeightMedium,
+  fontWeight: baseProperties.fontWeightBold,
 };
 
 const baseDisplayProperties = {
@@ -61,6 +59,7 @@ const baseDisplayProperties = {
 
 const typography = {
   fontFamily: baseProperties.fontFamily,
+  fontWeightLighter: baseProperties.fontWeightLighter,
   fontWeightLight: baseProperties.fontWeightLight,
   fontWeightRegular: baseProperties.fontWeightRegular,
   fontWeightMedium: baseProperties.fontWeightMedium,
@@ -102,29 +101,17 @@ const typography = {
     ...baseHeadingProperties,
   },
 
-  lg: {
-    fontSize: pxToRem(18),
-    lineHeight: 1.625,
-    ...baseHeadingProperties,
-  },
-
-  xxs: {
-    fontSize: pxToRem(10),
-    lineHeight: 1.625,
-    ...baseHeadingProperties,
-  },
-
   subtitle1: {
     fontFamily: baseProperties.fontFamily,
     fontSize: baseProperties.fontSizeXL,
-    fontWeight: baseProperties.fontWeightRegular,
+    fontWeight: baseProperties.fontWeightLight,
     lineHeight: 1.625,
   },
 
   subtitle2: {
     fontFamily: baseProperties.fontFamily,
-    fontSize: baseProperties.fontSizeRegular,
-    fontWeight: baseProperties.fontWeightMedium,
+    fontSize: baseProperties.fontSizeMD,
+    fontWeight: baseProperties.fontWeightLight,
     lineHeight: 1.6,
   },
 
@@ -137,15 +124,15 @@ const typography = {
 
   body2: {
     fontFamily: baseProperties.fontFamily,
-    fontSize: baseProperties.fontSizeRegular,
-    fontWeight: baseProperties.fontWeightRegular,
+    fontSize: baseProperties.fontSizeMD,
+    fontWeight: baseProperties.fontWeightLight,
     lineHeight: 1.6,
   },
 
   button: {
     fontFamily: baseProperties.fontFamily,
     fontSize: baseProperties.fontSizeSM,
-    fontWeight: baseProperties.fontWeightBold,
+    fontWeight: baseProperties.fontWeightLight,
     lineHeight: 1.5,
     textTransform: "uppercase",
   },
@@ -153,7 +140,7 @@ const typography = {
   caption: {
     fontFamily: baseProperties.fontFamily,
     fontSize: baseProperties.fontSizeXS,
-    fontWeight: baseProperties.fontWeightRegular,
+    fontWeight: baseProperties.fontWeightLight,
     lineHeight: 1.25,
   },
 
@@ -195,14 +182,16 @@ const typography = {
     xxs: baseProperties.fontSizeXXS,
     xs: baseProperties.fontSizeXS,
     sm: baseProperties.fontSizeSM,
-    regular: baseProperties.fontSizeRegular,
+    md: baseProperties.fontSizeMD,
     lg: baseProperties.fontSizeLG,
     xl: baseProperties.fontSizeXL,
+    "2xl": baseProperties.fontSize2XL,
+    "3xl": baseProperties.fontSize3XL,
   },
 
   lineHeight: {
     sm: 1.25,
-    regular: 1.5,
+    md: 1.5,
     lg: 2,
   },
 };

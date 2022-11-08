@@ -1,25 +1,22 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link, useHistory } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -31,12 +28,11 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiInput from "components/VuiInput";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDInput from "components/MDInput";
 
-// Vision UI Dashboard React example components
+// Material Dashboard 2 React example components
 import Breadcrumbs from "examples/Breadcrumbs";
 import NotificationItem from "examples/Items/NotificationItem";
 
@@ -49,28 +45,20 @@ import {
   navbarMobileMenu,
 } from "examples/Navbars/DashboardNavbar/styles";
 
-// Vision UI Dashboard React context
+// Material Dashboard 2 React context
 import {
-  useVisionUIController,
+  useMaterialUIController,
   setTransparentNavbar,
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
 
-// Images
-import team2 from "assets/images/team-2.jpg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import { auth } from "firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import Phantom from "phantom";
-
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
-  const [controller, dispatch] = useVisionUIController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
-  let history = useHistory();
 
   useEffect(() => {
     // Setting the navbar type
@@ -116,31 +104,24 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem
-        image={<img src={team2} alt="person" />}
-        title={["New message", "from Laur"]}
-        date="13 minutes ago"
-        onClick={handleCloseMenu}
-      />
-      <NotificationItem
-        image={<img src={logoSpotify} alt="person" />}
-        title={["New album", "by Travis Scott"]}
-        date="1 day"
-        onClick={handleCloseMenu}
-      />
-      <NotificationItem
-        color="text"
-        image={
-          <Icon fontSize="small" sx={{ color: ({ palette: { white } }) => white.main }}>
-            payment
-          </Icon>
-        }
-        title={["", "Payment successfully completed"]}
-        date="2 days"
-        onClick={handleCloseMenu}
-      />
+      <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
+      <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
+      <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
     </Menu>
   );
+
+  // Styles for the navbar icons
+  const iconsStyle = ({ palette: { dark, white, text }, functions: { rgba } }) => ({
+    color: () => {
+      let colorValue = light || darkMode ? white.main : dark.main;
+
+      if (transparentNavbar && !light) {
+        colorValue = darkMode ? rgba(text.main, 0.6) : text.main;
+      }
+
+      return colorValue;
+    },
+  });
 
   return (
     <AppBar

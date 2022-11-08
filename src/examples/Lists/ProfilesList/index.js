@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // react-routers components
@@ -25,33 +22,33 @@ import PropTypes from "prop-types";
 // @mui material components
 import Card from "@mui/material/Card";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiAvatar from "components/VuiAvatar";
-import VuiButton from "components/VuiButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDButton from "components/MDButton";
 
-function ProfilesList({ title, profiles }) {
+function ProfilesList({ title, profiles, shadow }) {
   const renderProfiles = profiles.map(({ image, name, description, action }) => (
-    <VuiBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
-      <VuiBox mr={2}>
-        <VuiAvatar src={image} alt="something here" variant="rounded" shadow="md" />
-      </VuiBox>
-      <VuiBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
-        <VuiTypography variant="button" fontWeight="medium">
+    <MDBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
+      <MDBox mr={2}>
+        <MDAvatar src={image} alt="something here" shadow="md" />
+      </MDBox>
+      <MDBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
+        <MDTypography variant="button" fontWeight="medium">
           {name}
-        </VuiTypography>
-        <VuiTypography variant="caption" color="text">
+        </MDTypography>
+        <MDTypography variant="caption" color="text">
           {description}
-        </VuiTypography>
-      </VuiBox>
-      <VuiBox ml="auto">
+        </MDTypography>
+      </MDBox>
+      <MDBox ml="auto">
         {action.type === "internal" ? (
-          <VuiButton component={Link} to={action.route} variant="text" color="info">
+          <MDButton component={Link} to={action.route} variant="text" color="info">
             {action.label}
-          </VuiButton>
+          </MDButton>
         ) : (
-          <VuiButton
+          <MDButton
             component="a"
             href={action.route}
             target="_blank"
@@ -60,32 +57,38 @@ function ProfilesList({ title, profiles }) {
             color={action.color}
           >
             {action.label}
-          </VuiButton>
+          </MDButton>
         )}
-      </VuiBox>
-    </VuiBox>
+      </MDBox>
+    </MDBox>
   ));
 
   return (
-    <Card sx={{ height: "100%" }}>
-      <VuiBox pt={2} px={2}>
-        <VuiTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+    <Card sx={{ height: "100%", boxShadow: !shadow && "none" }}>
+      <MDBox pt={2} px={2}>
+        <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
-        </VuiTypography>
-      </VuiBox>
-      <VuiBox p={2}>
-        <VuiBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+        </MDTypography>
+      </MDBox>
+      <MDBox p={2}>
+        <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {renderProfiles}
-        </VuiBox>
-      </VuiBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }
+
+// Setting default props for the ProfilesList
+ProfilesList.defaultProps = {
+  shadow: true,
+};
 
 // Typechecking props for the ProfilesList
 ProfilesList.propTypes = {
   title: PropTypes.string.isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  shadow: PropTypes.bool,
 };
 
 export default ProfilesList;

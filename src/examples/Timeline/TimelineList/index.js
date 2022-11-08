@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 // prop-types is a library for typechecking of props
@@ -22,25 +19,36 @@ import PropTypes from "prop-types";
 // @mui material components
 import Card from "@mui/material/Card";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+
+// Material Dashboard 2 React components
+import { useMaterialUIController } from "context";
 
 // Timeline context
 import { TimelineProvider } from "examples/Timeline/context";
 
 function TimelineList({ title, dark, children }) {
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
+
   return (
     <TimelineProvider value={dark}>
       <Card>
-        <VuiBox bgColor={dark ? "dark" : "white"} variant="gradient">
-          <VuiBox pt={3} px={3}>
-            <VuiTypography variant="h6" fontWeight="medium" color={dark ? "white" : "dark"}>
+        <MDBox
+          bgColor={dark ? "dark" : "white"}
+          variant="gradient"
+          borderRadius="xl"
+          sx={{ background: ({ palette: { background } }) => darkMode && background.card }}
+        >
+          <MDBox pt={3} px={3}>
+            <MDTypography variant="h6" fontWeight="medium" color={dark ? "white" : "dark"}>
               {title}
-            </VuiTypography>
-          </VuiBox>
-          <VuiBox p={2}>{children}</VuiBox>
-        </VuiBox>
+            </MDTypography>
+          </MDBox>
+          <MDBox p={2}>{children}</MDBox>
+        </MDBox>
       </Card>
     </TimelineProvider>
   );

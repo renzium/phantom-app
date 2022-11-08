@@ -1,182 +1,182 @@
-/*!
-
+/* eslint-disable react/prop-types */
+/* eslint-disable react/function-component-definition */
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-/* eslint-disable react/prop-types */
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiProgress from "components/VuiProgress";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDProgress from "components/MDProgress";
 
 // Images
-import AdobeXD from "examples/Icons/AdobeXD";
-import Atlassian from "examples/Icons/Atlassian";
-import Slack from "examples/Icons/Slack";
-import Spotify from "examples/Icons/Spotify";
-import Jira from "examples/Icons/Jira";
-import Invision from "examples/Icons/Invision";
+import LogoAsana from "assets/images/small-logos/logo-asana.svg";
+import logoGithub from "assets/images/small-logos/github.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoWebDev from "assets/images/small-logos/logo-webdev.svg";
-import logoXD from "assets/images/small-logos/logo-xd.svg";
 
-function Completion({ value, color }) {
-  return (
-    <VuiBox display="flex" flexDirection="column" alignItems="flex-start">
-      <VuiTypography variant="button" color="white" fontWeight="medium" mb="4px">
-        {value}%&nbsp;
-      </VuiTypography>
-      <VuiBox width="8rem">
-        <VuiProgress value={value} color={color} sx={{ background: "#2D2E5F" }} label={false} />
-      </VuiBox>
-    </VuiBox>
+export default function data() {
+  const Project = ({ image, name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" variant="rounded" />
+      <MDTypography display="block" variant="button" fontWeight="medium" ml={1} lineHeight={1}>
+        {name}
+      </MDTypography>
+    </MDBox>
   );
+
+  const Progress = ({ color, value }) => (
+    <MDBox display="flex" alignItems="center">
+      <MDTypography variant="caption" color="text" fontWeight="medium">
+        {value}%
+      </MDTypography>
+      <MDBox ml={0.5} width="9rem">
+        <MDProgress variant="gradient" color={color} value={value} />
+      </MDBox>
+    </MDBox>
+  );
+
+  return {
+    columns: [
+      { Header: "project", accessor: "project", width: "30%", align: "left" },
+      { Header: "budget", accessor: "budget", align: "left" },
+      { Header: "status", accessor: "status", align: "center" },
+      { Header: "completion", accessor: "completion", align: "center" },
+      { Header: "action", accessor: "action", align: "center" },
+    ],
+
+    rows: [
+      {
+        project: <Project image={LogoAsana} name="Asana" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $2,500
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            working
+          </MDTypography>
+        ),
+        completion: <Progress color="info" value={60} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        project: <Project image={logoGithub} name="Github" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $5,000
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            done
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        project: <Project image={logoAtlassian} name="Atlassian" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $3,400
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            canceled
+          </MDTypography>
+        ),
+        completion: <Progress color="error" value={30} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        project: <Project image={logoSpotify} name="Spotify" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $14,000
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            working
+          </MDTypography>
+        ),
+        completion: <Progress color="info" value={80} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        project: <Project image={logoSlack} name="Slack" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $1,000
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            canceled
+          </MDTypography>
+        ),
+        completion: <Progress color="error" value={0} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        project: <Project image={logoInvesion} name="Invesion" />,
+        budget: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            $2,300
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            done
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+    ],
+  };
 }
-
-const action = (
-  <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small">
-    more_vert
-  </Icon>
-);
-
-export default {
-  columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
-    { name: "status", align: "left" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
-  ],
-
-  rows: [
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <AdobeXD size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Chakra Vision UI Version
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $14,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Working
-        </VuiTypography>
-      ),
-      completion: <Completion value={60} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Atlassian size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add Progress Track
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $3,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Slack size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Fix Platform Errors
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Not set
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={30} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Spotify size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Launch our Mobile App
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $32,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={0} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Jira size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add the New Pricing Page
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $2,300
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
-    },
-  ],
-};

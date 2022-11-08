@@ -1,40 +1,34 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 /**
- * The base border styles for the Vision UI Dashboard  Material.
+ * The base border styles for the Material Dashboard 2 PRO React.
  * You can add new border width, border color or border radius using this file.
- * You can customized the borders value for the entire Vision UI Dashboard  Material using thie file.
+ * You can customized the borders value for the entire Material Dashboard 2 PRO React using thie file.
  */
 
-// Vision UI Dashboard React Base Styles
+// Material Dashboard 2 React Base Styles
 import colors from "assets/theme/base/colors";
 
-// Vision UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { borderCol } = colors;
+const { grey } = colors;
 
-export default {
-  borderColor: {
-    grey: { borderCol },
-    white: "rgba(226, 232, 240, 0.3)",
-  },
+const borders = {
+  borderColor: grey[300],
 
   borderWidth: {
     0: 0,
@@ -46,14 +40,14 @@ export default {
   },
 
   borderRadius: {
-    xs: pxToRem(2),
-    sm: pxToRem(4),
-    md: pxToRem(8),
-    button: pxToRem(12),
-    lg: pxToRem(15),
-    xl: pxToRem(20),
-    xxl: pxToRem(24),
-    form: pxToRem(24),
+    xs: pxToRem(1.6),
+    sm: pxToRem(2),
+    md: pxToRem(6),
+    lg: pxToRem(8),
+    xl: pxToRem(12),
+    xxl: pxToRem(16),
     section: pxToRem(160),
   },
 };
+
+export default borders;

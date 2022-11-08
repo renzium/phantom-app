@@ -1,30 +1,27 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { useState } from "react";
 
 // @mui material components
 import Card from "@mui/material/Card";
+import Switch from "@mui/material/Switch";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiSwitch from "components/VuiSwitch";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 function PlatformSettings() {
   const [followsMe, setFollowsMe] = useState(true);
@@ -32,123 +29,85 @@ function PlatformSettings() {
   const [mentionsMe, setMentionsMe] = useState(true);
   const [newLaunches, setNewLaunches] = useState(false);
   const [productUpdate, setProductUpdate] = useState(true);
-  const [newsletter, setNewsletter] = useState(true);
-  const [mails, setMails] = useState(false);
+  const [newsletter, setNewsletter] = useState(false);
 
   return (
-    <Card sx={{ minHeight: "490px", height: "100%" }}>
-      <VuiBox mb="26px">
-        <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
+    <Card sx={{ boxShadow: "none" }}>
+      <MDBox p={2}>
+        <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           platform settings
-        </VuiTypography>
-      </VuiBox>
-      <VuiBox lineHeight={1.25}>
-        <VuiTypography
-          variant="xxs"
-          fontWeight="medium"
-          mb="20px"
-          color="text"
-          textTransform="uppercase"
-        >
+        </MDTypography>
+      </MDBox>
+      <MDBox pt={1} pb={2} px={2} lineHeight={1.25}>
+        <MDTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
           account
-        </VuiTypography>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch color="info" checked={followsMe} onChange={() => setFollowsMe(!followsMe)} />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+        </MDTypography>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={followsMe} onChange={() => setFollowsMe(!followsMe)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               Email me when someone follows me
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={answersPost}
-              onChange={() => setAnswersPost(!answersPost)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={answersPost} onChange={() => setAnswersPost(!answersPost)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               Email me when someone answers on my post
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              sx={{ background: "#1B1F3D", color: "#fff" }}
-              color="info"
-              checked={mentionsMe}
-              onChange={() => setMentionsMe(!mentionsMe)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={mentionsMe} onChange={() => setMentionsMe(!mentionsMe)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               Email me when someone mentions me
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox mb="6px">
-          <VuiTypography variant="xxs" fontWeight="medium" color="text" textTransform="uppercase">
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox mt={3}>
+          <MDTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
             application
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={newLaunches}
-              onChange={() => setNewLaunches(!newLaunches)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+          </MDTypography>
+        </MDBox>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={newLaunches} onChange={() => setNewLaunches(!newLaunches)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               New launches and projects
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={productUpdate}
-              onChange={() => setProductUpdate(!productUpdate)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={productUpdate} onChange={() => setProductUpdate(!productUpdate)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               Monthly product updates
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={newsletter}
-              onChange={() => setNewsletter(!newsletter)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox display="flex" alignItems="center" mb={0.5} ml={-1.5}>
+          <MDBox mt={0.5}>
+            <Switch checked={newsletter} onChange={() => setNewsletter(!newsletter)} />
+          </MDBox>
+          <MDBox width="80%" ml={0.5}>
+            <MDTypography variant="button" fontWeight="regular" color="text">
               Subscribe to newsletter
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex">
-          <VuiBox mt={0.25}>
-            <VuiSwitch color="info" checked={mails} onChange={() => setMails(!mails)} />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              Receive mails weekly
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-      </VuiBox>
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }

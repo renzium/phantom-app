@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Visionware.
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
 /**
@@ -21,18 +18,18 @@
   you can customize the states for the different components here.
 */
 
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useMemo } from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
-// The Vision UI Dashboard  Material main context
-const VisionUI = createContext();
+// Material Dashboard 2 React main context
+const MaterialUI = createContext();
 
 // Setting custom name for the context which is visible on react dev tools
-VisionUI.displayName = "VisionUIContext";
+MaterialUI.displayName = "MaterialUIContext";
 
-// Vision UI Dashboard React reducer
+// Material Dashboard 2 React reducer
 function reducer(state, action) {
   switch (action.type) {
     case "MINI_SIDENAV": {
@@ -40,6 +37,9 @@ function reducer(state, action) {
     }
     case "TRANSPARENT_SIDENAV": {
       return { ...state, transparentSidenav: action.value };
+    }
+    case "WHITE_SIDENAV": {
+      return { ...state, whiteSidenav: action.value };
     }
     case "SIDENAV_COLOR": {
       return { ...state, sidenavColor: action.value };
@@ -59,65 +59,78 @@ function reducer(state, action) {
     case "LAYOUT": {
       return { ...state, layout: action.value };
     }
+    case "DARKMODE": {
+      return { ...state, darkMode: action.value };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
 }
 
-// Vision UI Dashboard React context provider
-function VisionUIControllerProvider({ children }) {
+// Material Dashboard 2 React context provider
+function MaterialUIControllerProvider({ children }) {
   const initialState = {
     miniSidenav: false,
-    transparentSidenav: true,
+    transparentSidenav: false,
+    whiteSidenav: false,
     sidenavColor: "info",
     transparentNavbar: true,
     fixedNavbar: true,
     openConfigurator: false,
     direction: "ltr",
     layout: "dashboard",
+    darkMode: false,
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
 
-  return <VisionUI.Provider value={[controller, dispatch]}>{children}</VisionUI.Provider>;
+  const value = useMemo(() => [controller, dispatch], [controller, dispatch]);
+
+  return <MaterialUI.Provider value={value}>{children}</MaterialUI.Provider>;
 }
 
-// Vision UI Dashboard React custom hook for using context
-function useVisionUIController() {
-  const context = useContext(VisionUI);
+// Material Dashboard 2 React custom hook for using context
+function useMaterialUIController() {
+  const context = useContext(MaterialUI);
 
   if (!context) {
-    throw new Error("useVisionUIController should be used inside the VisionUIControllerProvider.");
+    throw new Error(
+      "useMaterialUIController should be used inside the MaterialUIControllerProvider."
+    );
   }
 
   return context;
 }
 
-// Typechecking props for the VisionUIControllerProvider
-VisionUIControllerProvider.propTypes = {
+// Typechecking props for the MaterialUIControllerProvider
+MaterialUIControllerProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
 // Context module functions
 const setMiniSidenav = (dispatch, value) => dispatch({ type: "MINI_SIDENAV", value });
 const setTransparentSidenav = (dispatch, value) => dispatch({ type: "TRANSPARENT_SIDENAV", value });
+const setWhiteSidenav = (dispatch, value) => dispatch({ type: "WHITE_SIDENAV", value });
 const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
 const setTransparentNavbar = (dispatch, value) => dispatch({ type: "TRANSPARENT_NAVBAR", value });
 const setFixedNavbar = (dispatch, value) => dispatch({ type: "FIXED_NAVBAR", value });
 const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGURATOR", value });
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
+const setDarkMode = (dispatch, value) => dispatch({ type: "DARKMODE", value });
 
 export {
-  VisionUIControllerProvider,
-  useVisionUIController,
+  MaterialUIControllerProvider,
+  useMaterialUIController,
   setMiniSidenav,
   setTransparentSidenav,
+  setWhiteSidenav,
   setSidenavColor,
   setTransparentNavbar,
   setFixedNavbar,
   setOpenConfigurator,
   setDirection,
   setLayout,
+  setDarkMode,
 };

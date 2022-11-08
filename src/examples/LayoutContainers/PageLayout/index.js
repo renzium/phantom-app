@@ -1,19 +1,16 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
 import { useEffect } from "react";
@@ -24,14 +21,14 @@ import { useLocation } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
 
-// Vision UI Dashboard React context
-import { useVisionUIController, setLayout } from "context";
+// Material Dashboard 2 React context
+import { useMaterialUIController, setLayout } from "context";
 
-function PageLayout({ children }) {
-  const [, dispatch] = useVisionUIController();
+function PageLayout({ background, children }) {
+  const [, dispatch] = useMaterialUIController();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -39,24 +36,15 @@ function PageLayout({ children }) {
   }, [pathname]);
 
   return (
-    <VuiBox
+    <MDBox
       width="100vw"
-      maxWidth="100%"
       height="100%"
       minHeight="100vh"
-      sx={({ functions: { tripleLinearGradient }, palette: { gradients } }) => ({
-        overflowX: "hidden",
-        backgroundImage: tripleLinearGradient(
-          gradients.cover.main,
-          gradients.cover.state,
-          gradients.cover.stateSecondary,
-          gradients.cover.deg
-        ),
-        position: "relative",
-      })}
+      bgColor={background}
+      sx={{ overflowX: "hidden" }}
     >
       {children}
-    </VuiBox>
+    </MDBox>
   );
 }
 
@@ -67,6 +55,7 @@ PageLayout.defaultProps = {
 
 // Typechecking props for the PageLayout
 PageLayout.propTypes = {
+  background: PropTypes.oneOf(["white", "light", "default"]),
   children: PropTypes.node.isRequired,
 };
 

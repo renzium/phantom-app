@@ -1,50 +1,43 @@
-/*!
-
+/**
 =========================================================
-* Vision UI Free React - v1.0.0
+* Material Dashboard 2 React - v2.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-* Design and Coded by Simmmple & Creative Tim
+Coded by www.creative-tim.com
 
-=========================================================
+ =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 
-// Vision UI Dashboard React Base Styles
+// Material Dashboard 2 React Base Styles
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
 
-// Vision UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
 const { fontWeightBold, size } = typography;
 const { borderRadius } = borders;
 
-export default {
+const root = {
   display: "inline-flex",
   justifyContent: "center",
   alignItems: "center",
   fontSize: size.xs,
   fontWeight: fontWeightBold,
-  borderRadius: borderRadius.button,
-  padding: `${pxToRem(12)} ${pxToRem(24)}`,
+  borderRadius: borderRadius.lg,
+  padding: `${pxToRem(6.302)} ${pxToRem(16.604)}`,
   lineHeight: 1.4,
   textAlign: "center",
-  textTransform: "unset",
+  textTransform: "uppercase",
   userSelect: "none",
   backgroundSize: "150% !important",
   backgroundPositionX: "25% !important",
-  transition: `all 150ms ease-in`,
-
-  "&:hover": {
-    transform: "scale(1.02)",
-  },
+  transition: "all 150ms ease-in",
 
   "&:disabled": {
     pointerEvent: "none",
@@ -56,3 +49,5 @@ export default {
     marginTop: pxToRem(-2),
   },
 };
+
+export default root;

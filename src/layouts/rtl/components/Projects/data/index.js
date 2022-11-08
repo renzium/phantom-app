@@ -1,39 +1,52 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/function-component-definition */
+/**
+=========================================================
+* Material Dashboard 2 React - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
 // @mui material components
 import Tooltip from "@mui/material/Tooltip";
 
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiAvatar from "components/VuiAvatar";
-import VuiProgress from "components/VuiProgress";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDProgress from "components/MDProgress";
 
 // Images
-import AdobeXD from "examples/Icons/AdobeXD";
-import Atlassian from "examples/Icons/Atlassian";
-import Slack from "examples/Icons/Slack";
-import Spotify from "examples/Icons/Spotify";
-import Jira from "examples/Icons/Jira";
-import Invision from "examples/Icons/Invision";
+import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
 import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoJira from "assets/images/small-logos/logo-jira.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
-import avatar1 from "assets/images/avatar1.png";
-import avatar2 from "assets/images/avatar2.png";
-import avatar3 from "assets/images/avatar3.png";
-import avatar4 from "assets/images/avatar4.png";
+import team1 from "assets/images/team-1.jpg";
+import team2 from "assets/images/team-2.jpg";
+import team3 from "assets/images/team-3.jpg";
+import team4 from "assets/images/team-4.jpg";
 
 export default function data() {
-  const avatars = (members) =>
-    members.map(([image, name]) => (
+  const avatars = (أعضاء) =>
+    أعضاء.map(([image, name]) => (
       <Tooltip key={name} title={name} placeholder="bottom">
-        <VuiAvatar
+        <MDAvatar
           src={image}
           alt="name"
           size="xs"
           sx={{
-            border: ({ borders: { borderWidth }, palette: { dark } }) =>
-              `${borderWidth[2]} solid ${dark.focus}`,
+            border: ({ borders: { borderWidth }, palette: { white } }) =>
+              `${borderWidth[2]} solid ${white.main}`,
             cursor: "pointer",
             position: "relative",
 
@@ -49,200 +62,167 @@ export default function data() {
       </Tooltip>
     ));
 
+  const Company = ({ image, name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" />
+      <MDTypography variant="button" fontWeight="medium" ml={1} lineHeight={1}>
+        {name}
+      </MDTypography>
+    </MDBox>
+  );
+
   return {
     columns: [
-      { name: "شركات", align: "left" },
-      { name: "أفراد", align: "left" },
-      { name: "تبرع", align: "center" },
-      { name: "انتهاء", align: "center" },
+      { Header: "المشروع", accessor: "المشروع", width: "45%", align: "left" },
+      { Header: "أعضاء", accessor: "أعضاء", width: "10%", align: "left" },
+      { Header: "ميزانية", accessor: "ميزانية", align: "center" },
+      { Header: "إكمال", accessor: "إكمال", align: "center" },
     ],
 
     rows: [
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <AdobeXD size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              إصدار Vision UI XD
-            </VuiTypography>
-          </VuiBox>
+        المشروع: (
+          <Company
+            image={logoXD}
+            name="/**
+=========================================================
+* Material Dashboard 2 React - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/ الإصدار"
+          />
         ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
+        أعضاء: (
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar2, "Romina Hadid"],
-              [avatar3, "Alexander Smith"],
-              [avatar4, "Jessica Doe"],
+              [team1, "Ryan Tompson"],
+              [team2, "Romina Hadid"],
+              [team3, "Alexander Smith"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $14,000
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={60} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={60} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <Atlassian size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              إضافة مسار التقدم
-            </VuiTypography>
-          </VuiBox>
-        ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
+        المشروع: <Company image={logoAtlassian} name="أضف مسار التقدم إلى التطبيق الداخلي" />,
+        أعضاء: (
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar2, "Romina Hadid"],
-              [avatar4, "Jessica Doe"],
+              [team2, "Romina Hadid"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $3,000
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={10} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={10} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <Slack size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              إصلاح أخطاء النظام الأساسي
-            </VuiTypography>
-          </VuiBox>
-        ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
+        المشروع: <Company image={logoSlack} name="إصلاح أخطاء النظام الأساسي" />,
+        أعضاء: (
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar3, "Alexander Smith"],
+              [team1, "Ryan Tompson"],
+              [team3, "Alexander Smith"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             غير مضبوط
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={100} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={100} color="success" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <Spotify size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              إطلاق تطبيق الهاتف المحمول الخاص بنا
-            </VuiTypography>
-          </VuiBox>
-        ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
+        المشروع: <Company image={logoSpotify} name="إطلاق تطبيق الهاتف المحمول الخاص بنا" />,
+        أعضاء: (
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar4, "Jessica Doe"],
-              [avatar3, "Alexander Smith"],
-              [avatar2, "Romina Hadid"],
-              [avatar1, "Ryan Tompson"],
+              [team4, "Jessica Doe"],
+              [team3, "Alexander Smith"],
+              [team2, "Romina Hadid"],
+              [team1, "Ryan Tompson"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $20,500
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={100} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={100} color="success" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <Jira size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              أضف صفحة الأسعار الجديدة
-            </VuiTypography>
-          </VuiBox>
+        المشروع: <Company image={logoJira} name="أضف صفحة التسعير الجديدة" />,
+        أعضاء: (
+          <MDBox display="flex" py={1}>
+            {avatars([[team4, "Jessica Doe"]])}
+          </MDBox>
         ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
-            {avatars([[avatar4, "Jessica Doe"]])}
-          </VuiBox>
-        ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $500
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={25} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={25} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
       {
-        شركات: (
-          <VuiBox display="flex" alignItems="center">
-            <Invision size="20px" />
-            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              إعادة تصميم متجر جديد على الإنترنت
-            </VuiTypography>
-          </VuiBox>
-        ),
-        أفراد: (
-          <VuiBox display="flex" py={1}>
+        المشروع: <Company image={logoInvesion} name="إعادة تصميم متجر جديد على الإنترنت" />,
+        أعضاء: (
+          <MDBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar4, "Jessica Doe"],
+              [team1, "Ryan Tompson"],
+              [team4, "Jessica Doe"],
             ])}
-          </VuiBox>
+          </MDBox>
         ),
-        تبرع: (
-          <VuiTypography variant="button" color="white" fontWeight="bold">
+        ميزانية: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             $2,000
-          </VuiTypography>
+          </MDTypography>
         ),
-        انتهاء: (
-          <VuiBox width="8rem" textAlign="left">
-            <VuiTypography color="white" variant="button" fontWeight="bold">
-              100%
-            </VuiTypography>
-            <VuiProgress value={40} color="info" label={false} sx={{ background: "#2D2E5F" }} />
-          </VuiBox>
+        إكمال: (
+          <MDBox width="8rem" textAlign="left">
+            <MDProgress value={40} color="info" variant="gradient" label={false} />
+          </MDBox>
         ),
       },
     ],
